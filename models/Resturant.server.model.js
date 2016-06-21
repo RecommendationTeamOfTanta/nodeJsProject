@@ -112,7 +112,7 @@ var resturantFeatures = new schema({
 });
 
 
-// create the resturantSchema
+// create the resturantschema
 var resturantSchema = new schema({
 	name: string,
 	description: string,
