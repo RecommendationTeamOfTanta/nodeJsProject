@@ -1,12 +1,12 @@
 ﻿var mongoose = require('mongoose');
-var schema = mongoose.schema;
+var schema = mongoose.Schema;
 
 
 
 //users
 
 var userFeatures = new schema({
-    userId: { type: ObjectId, ref: 'User' },
+    userId: { type: schema.Types.ObjectId, ref: 'User' },
     couple: Boolean,
     young: Boolean,
     smoking: Boolean,
@@ -14,10 +14,17 @@ var userFeatures = new schema({
     religion: String,
     sport: String,
     dayOfWeek: String,
-    placeOfBirth: date,
+    placeOfBirth: Date,
     tasteOfMusic: String,
-    payingMethod: string
+    payingMethod: String
 });
+
+
+//var userFavourite = new schema({
+//    userId: { type: schema.Types.ObjectId, ref: 'User' },
+//    rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' },
+
+//});
 
 // create the usersSchema
 var usersSchema = new schema({
@@ -27,19 +34,19 @@ var usersSchema = new schema({
         last: String
     },
     adress: String,
-    theEmail: string,
+    theEmail: String,
     password: String,
-    picture: string,
-    birthDate: { type: date },
+    picture: String,
+    birthDate: { type: Date },
     gender: String,
-    mobile: string,
+    mobile: String,
     role: String,
-    favourites: [{ type: ObjectId, ref: 'Resturant' }],
+    favourites: [{ type: schema.Types.ObjectId, ref: 'Resturant' }],
     features: userFeatures,
 
     //the recommendation for the user(user-based)
     recommended_resturants: [{
-        rest_id: { type: ObjectId, ref: 'Resturant' },
+        rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' },
         rankValue: Number
     }]
 });
@@ -50,8 +57,8 @@ var User = mongoose.model('User', usersSchema);
 
 //resturants 
 var productRateSchema = new schema({
-    userId: { type: ObjectId, ref: 'User' },
-    productVote: number
+    userId: { type: schema.Types.ObjectId, ref: 'User' },
+    productVote: Number
 });
 var productSchema = new schema({
     name: String,
@@ -72,21 +79,28 @@ var CategorySchema = new schema({
 });
 
 var resturantRateSchema = new schema({
-    userId: { type: ObjectId, ref: 'User' },
-    rest_id: { type: ObjectId, ref: 'Resturant' },
-    resturantVote: number
+    userId: { type: schema.Types.ObjectId, ref: 'User' },
+    rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' },
+    resturantVote: Number,
+    _id:false
 });
 
 var resturantReviewSchema = new schema({
-    userId: { type: ObjectId, ref: 'User' },
-    restId: { type: ObjectId, ref: 'Resturant' },
+    userId: { type: schema.Types.ObjectId, ref: 'User' },
+    restId: { type: schema.Types.ObjectId, ref: 'Resturant' },
     ReviewTxt: String,
     review_date: { type: Date, default: Date.now }
 });
 
-
+var brancheSchema = new schema({
+    name: String,
+    city: String,
+    latitude: Number,
+    longitude: Number,
+    restId: { type: schema.Types.ObjectId, ref: 'Resturant' }
+});
 var resturantFeatures = new schema({
-    rest_id: { type: ObjectId, ref: 'Resturant' },
+    rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' },
     famous: Boolean,
     smokingArea: Boolean,
     placeForChildren: Boolean,
@@ -95,7 +109,7 @@ var resturantFeatures = new schema({
     delivery: Boolean,
     wifi: Boolean,
     makeSmallParties: Boolean,
-    noiseLevel: string,
+    noiseLevel: String,
     stuffBehavior: String,
     acceptCreditCard: Boolean,
     outDoorSetting: String,
@@ -123,21 +137,16 @@ var resturantFeatures = new schema({
 
 // create the resturantschema
 var resturantSchema = new schema({
-    name: string,
-    description: string,
-    photo: string,
+    name: String,
+    description: String,
+    photo: String,
     location: String,
     mobile: String,
     workingHours: {
         startAt: String,
         endAt: String
     },
-    branches: [{
-        name: String,
-        city: String,
-        latitude: Number,
-        longitude: Number
-    }],
+    branches: [brancheSchema],
     features: resturantFeatures,
     categories: [CategorySchema],
     rates: [resturantRateSchema],
@@ -145,17 +154,26 @@ var resturantSchema = new schema({
 
     //the recommendation for resturants(item-based)
     similarResturants: [{
-        rest_id: { type: ObjectId, ref: 'Resturant' },
+        rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' },
         rankValue: Number
     }]
 });
 
+// create unique index while rating
+resturantRateSchema.index({ userId: 1, rest_id: 1 }, { unique: true });
+resturantSchema.index({ rates: 1}, { unique: true });
+
+
 // build the Resturant model from the resturantSchema
 var Resturant = mongoose.model('Resturant', resturantSchema);
 
-
+var Rate = mongoose.model('Rate', resturantRateSchema);
+//var Branch = mongoose.model('Branch', brancheSchema);
 //exporting the models
 module.exports = {
     User: User,
-    Resturant: Resturant
+    Resturant: Resturant,
+    Rate: Rate
+    //Branch:Branch
 };
+

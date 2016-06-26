@@ -1,0 +1,69 @@
+﻿{% extends 'layout.html' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block head %}
+  {% parent %}
+<link rel="stylesheet" href="custom.css">
+{% endblock %}
+
+{% block content %}
+<form role="form" class="add-product-form">
+    <div class="form-group">
+        <label for="product-name">Name:</label>
+        <input type="text" class="form-control" id="product-name">
+    </div>
+
+    <div class="form-group">
+        <label for="product-quentity">Quentity:</label>
+        <input type="text" class="form-control" id="product-quentity">
+    </div>
+
+    <div class="form-group">
+        <label for="product-price">Price:</label>
+        <input type="text" class="form-control" id="product-price">
+    </div>
+
+    <div class="form-group">
+        <label for="product-desc">Description:</label>
+        <input type="text" class="form-control" id="product-desc">
+    </div>
+
+    <div class="form-group">
+        <label for="product-spec">Specification:</label>
+        <textarea class="form-control" id="product-spec" cols="30" rows="6"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="product-kf">Key Features:</label>
+        <textarea class="form-control" id="product-kf" cols="30" rows="6"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="product-cat">Categories:</label>
+        <div id="cat-list"></div>
+    </div>
+
+    <div class="form-group">
+        <label for="product-brand">Brand:</label>
+        <div id="brand-list"></div>
+    </div>
+
+    <div class="form-group">
+        <label for="product-images">images:</label>
+        <input type="file" id="upload" multiple />
+    </div>
+
+    <div style="width:300px;">
+        <div id="progressbar" style="position:relative; display:none;">
+            <span id="progressbar-lable" style="position:absolute; left:35%; top:20%">Uploading Images...</span>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-success pull-right" onclick="addProduct();">Add Product</button>
+</form>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-ui.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/products.js"></script>
+{% endblock %}

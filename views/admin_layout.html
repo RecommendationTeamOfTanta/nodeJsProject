@@ -1,0 +1,93 @@
+﻿
+
+<title>Admin</title>
+
+<!-- Bootstrap Core CSS -->
+<link href="/stylesheets/bootstrap.css" rel="stylesheet" />
+<link href="/stylesheets/Admin.css" rel="stylesheet" />
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Admin Page</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class=""><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" id="add-category">Add Category</a></li>
+                        <li><a href="#" id="manage-cat">Manage Categories</a></li>
+
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Brands<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" id="add-brand">Add Brand</a></li>
+                        <li><a href="#" id="manage-brand">Manage Brands</a></li>
+
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Products<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a id="add-product" href="#">Add Product</a></li>
+                        <li><a href="#" id="manage-prod">Manage products</a></li>
+
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Manage Users</a></li>
+
+                    </ul>
+                </li>
+
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div id="alert-brand" class="alert alert-success" style="display:none;padding-top:50px">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Success!</strong> Added successfully.
+</div>
+<div id="alert-brand-fail" class="alert alert-danger" style="display:none">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>failed!</strong> exsisted before
+</div>
+
+
+
+<div id="content" class="container" style="padding-top:100px">
+    <div id="LoadingImage" style="display: none">
+        <img src="img/loadingGif.gif" />
+    </div>
+
+
+
+
+
+</div>
+
+
+
+
+<!-- jQuery -->
+<script src="/javascripts/jquery-1.11.3.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="/javascripts/bootstrap.min.js"></script>
+<script src="/javascripts/AdminJs.js"></script>
