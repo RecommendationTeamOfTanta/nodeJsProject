@@ -155,7 +155,7 @@ exports.createUser = function () {
     theUser.save();
 }
 
-
+//
 exports.Getall = function () {
 
     //Resturant.find({}, function (err, resturants) {
