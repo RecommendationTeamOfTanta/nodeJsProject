@@ -8,13 +8,16 @@ router.get('/', function (req, res, next) {
     res.render('index', { title: 'tittlooo', name: 'eissavivh' });
 });
 
-router.post('/eissa', function (req, res) {
-    itargetCtrl.inserRate();
+router.get('/eissa', function (req, res) {
+    //itargetCtrl.insertRate("577230f0bb2f1b2e7ce995f0","57722ebcbb2f1b1af0000f68",10);
     //return itargetCtrl.createRest(req.body);
+    itargetCtrl.GetAllResturants();
+
 });
 
-router.post('/tefa', function (request, response) {
-    return response.end(JSON.stringify({"eissa":3.5}));
+router.get('/getall', function (request, response) {
+    //return response.end(JSON.stringify({"eissa":3.5}));
+    itargetCtrl.Getall();
 });
 
 module.exports = router;

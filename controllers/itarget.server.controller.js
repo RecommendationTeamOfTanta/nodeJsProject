@@ -4,115 +4,116 @@ var Resturant = models.Resturant;
 var Rate = models.Rate;
 //var Branch = models.Branch;
 
+exports.insertRate = function (user_id, rest_id, rate) {
+    //check if user rate before
+    Resturant.findOne({ _id: rest_id, "rates.user_id": user_id }, function (err, resturant) {
+
+        // if not rate insert it
+            if (!resturant) {
+                console.log("not");
+                Resturant.update({ '_id': rest_id },
+                 { $push: { "rates": { "resturantVote": rate, "user_id": user_id } } },
+                 { upsert: true },
+            function () {}
+                 );
+            }
+
+                // if he rate before delete it then insert the new(update)
+            else {
+                //delete or remove
+                Resturant.update(
+                { '_id': rest_id },
+                { $pull: { "rates": { "user_id": user_id } } },
+            false,
+            function () {
+
+            }
+            );
+                //then insert te new rate 
+                Resturant.update({ '_id': rest_id },
+                 { $push: { "rates": { "resturantVote": rate, "user_id": user_id } } },
+                 { upsert: true },
+            function () { }
+                 );
+
+            }
+        });
+    
+    //console.log(u);
 
 
-exports.inserRate = function () {
+    //    Resturant.update(
+    //    { '_id': "57722ebcbb2f1b1af0000f68" },
+    //    { $pull: { "rates": { "user_id": "57723096bb2f1b2e7ce995db" } } },
+    //false,
+    //function () {
+
+    //}
+    //);
+}
+
+
+exports.insertRatee = function () {
     var rate = new Rate({
-        userId: "5769763a93fbdd4447280742",
+        user_id: "5769763a93fbdd4447280742",
         rest_id: "576c35b2aec1b74c4f8ff0f4",
-        resturantVote: 2
+        resturantVote: 5
     });
 
 
-    var query = Resturant.findOne({ _id: "576c35b2aec1b74c4f8ff0f4" });
-
-
-    // execute the query at a later time
-    query.exec(function (err, resturant) {
-        console.log(resturant._id);
-
-        // we use update there to prevent duplicate rating for from the the user to the same resturant
-        Rate.update({ $and: [{ userId: rate.userId }, { rest_id: rate.rest_id }] },
+    // we use update there to prevent duplicate rating for from the the user to the same resturant
+    Rate.update({ $and: [{ user_id: rate.user_id }, { rest_id: rate.rest_id }] },
             { $set: { resturantVote: rate.resturantVote } },
             { upsert: true },
             function () { }
   );
-        //resturant.rates.push(rate);
 
-        ////////////////////////////
-        Resturant.find(
-{
-    "rates": { $elemMatch: { "rest_id": rate.rest_id, "rest_id": rate.userId } }
-}).forEach(function (item) {
-    console.log(item)
-    //var us = item.US;
+    ////////////////////////////
+    //        Resturant.find(
+    //{
+    //    "rates": { $elemMatch: { "rest_id": rate.rest_id, "rest_id": rate.userId } }
+    //}).forEach(function (item) {
+    //    console.log(item)
 
-    //for (var i = 0; i < item.US.length; i++) {
-    //    var tasks = item.US[i].tasks;
-    //    for (var i2 = 0; i2 < tasks.length; i2++) {
-    //        var task = tasks[i2];
-    //        var id = task._id;
+    //});
+    //////////////////////////////
 
-    //        if (id == "544029257266e4841735cde8") {
-    //            // add new filed
-    //            task.pointse = {};
-    //            break;
-    //        }
-    //    }
+
+    //      Resturant.update({ _id: rate.rest_id },
+    //             { "$push": { "rates": { "resturantVote": rate.resturantVote, "user_id": rate.user_id } } }
+    //);
+
+    //      console.log("done");
+
+    //      Resturant.update(
+    // { _id: "576c35b2aec1b74c4f8ff0f4" },
+    // {},
+    //{
+    //    upsert: true
     //}
-
-    //db.projects.save(item);
-});
-        //////////////////////////////
-
-
-        Resturant.update({ _id: rate.rest_id },
-               //{ $addToSet: { rates: rate } },
-               //{ $addToSet: { "rates": { "userId": rate.userId, "rest_id": rate.rest_id } } },
-            { upsert: true },
-            function () { }
-  );
-
-        console.log("done");
-
-        //      Resturant.update(
-        // { _id: "576c35b2aec1b74c4f8ff0f4" },
-        // {},
-        //{
-        //    upsert: true
-        //}
-        //);
-        //      //rate.save();
-        //      //resturant.rates.push(rate);
-        //      //resturant.save();
-    });
+    //);
+    //      //rate.save();
+    //      //resturant.rates.push(rate);
+    //      //resturant.save();
+    //});
 
 
 }
 
-//exports.insertBranch = function () {
-//    var branch = new Branch({
-//        name: "medan-el-sa3a",
-//        city: "Tanta",
-//        latitude: 76.720845,
-//        longitude: 30.712097,
-//        restId:"5769710e5fceffac0bd31ca9"
-//    });
-
-//    var query = Resturant.findOne({ _id: "5769710e5fceffac0bd31ca9" });
 
 
-//    // execute the query at a later time
-//    query.exec(function (err, resturant) {
-//        console.log(rest._id);
-//        branch.save();
-//        rest.branches.push(branch);
-//        resturant.save();
-//    });
-
-//}
-
-exports.updateUser = function () {
-    // find each person with a last name matching 'Ghost'
-    var query = User.findOne({ _id: "576974ec603228d819b34a40" });
-
-    // selecting the `name` and `occupation` fields
-    query.select('adress');
-
-    // execute the query at a later time
-    query.exec(function (err, person) {
-        console.log(person.adress); // Space Ghost is a talk show host.
+exports.GetAllResturants = function () {
+    Resturant.find({}, {}, {skip: 10,limit: 2    }, function (err, resturants) {
+        console.log(JSON.stringify(resturants));
     });
+}
+
+
+exports.GetResturantById = function (rest_id) {
+    (Resturant.find({_id:rest_id},function (err, resturant){
+        console.log(resturant);
+    })
+    );
 }
 
 
@@ -122,6 +123,8 @@ exports.createResturant = function (resturant) {
     rest.save();
     console.log('succ')
 }
+
+
 eissadd = [];
 eissadd.push({
     rest_id: "5769710e5fceffac0bd31ca9",
@@ -130,6 +133,8 @@ eissadd.push({
     rest_id: "5769710e5fceffac0bd31ca9",
     rankValue: 2
 });
+
+
 exports.createUser = function () {
     var theUser = new User({
         name: {
@@ -148,4 +153,29 @@ exports.createUser = function () {
     });
 
     theUser.save();
+}
+
+
+exports.Getall = function () {
+
+    //Resturant.find({}, function (err, resturants) {
+
+    //    console.log(resturants);
+    //});
+
+
+
+    Resturant.find({}, function (err, resturants) {
+        console.log(JSON.stringify(resturants));
+        //var returnedObject = {};
+
+        //resturants.forEach(function (resturant) {
+        //    //returnedObject[resturant._id] = resturant;
+        //    console.log(resturant);
+
+    });
+
+    //console.log(JSON.stringify(returnedObject));
+    //    });
+
 }
