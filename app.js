@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var session = require('client-sessions');
+const session = require("client-sessions");
 
 //sessions through mongoDB
 //var mongoStore = require('connect-mongo')(express);
@@ -16,7 +16,7 @@ var signup = require('./routes/signup.js');
 
 var mongoose = require('mongoose');
 //mongoose.connect('mongodb://itarget:itarget@ds025792.mlab.com:25792/itarget');
-mongoose.connect('mongodb://localhost:27017/itargetLocal');
+mongoose.connect('mongodb://localhost:27017/itarget');
 var app = express();
 
 
@@ -28,6 +28,23 @@ app.engine('html', swig.renderFile)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 
+//session
+app.use(session({
+    cookieName: 'session',
+    secret: 'fddsfsdfhkjsdhfkjsfhjkhfddsjkhfsjdkhfsdj',
+    duration: 30 * 60 * 1000,
+    activeDuration: 5 * 60 * 1000
+}));
+
+app.use(function (req, res, next) {
+    if (req.session && req.session.user) {
+        res.locals.login = true;
+        next();
+    } else {
+        res.locals.login = false;
+        next();
+    }
+});
 
 
 // uncomment after placing your favicon in /public
@@ -41,21 +58,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/signup',signup)
+app.use('/', signup)
 
 // session and cookies details
-app.use(session({
-    cookieName: 'session',
-    secret: 'random_string_goes_here',
-    duration: 30 * 60 * 1000
-}));
+
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
+
 
 //to modify http response header (X-Powered-By of the request header)
 app.use(function (req, res, next) {

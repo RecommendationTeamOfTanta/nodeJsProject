@@ -1,5 +1,14 @@
 /** resets **/
 
+.form-border {
+        border: 1px solid #e2e2e2;
+        padding: 10px;
+    }
+
+    .img-clean {
+        background-image: url(../img/clean.jpg);
+    }
+
 #topContainer {
     background-image: url("../img/background.jpg");
     width: 100%;
@@ -94,7 +103,7 @@
 }
 
 .img-clean {
-    background-image: url(img/clean.jpg);
+    background-image: url(../img/clean.jpg);
 }
 
 h1 {
