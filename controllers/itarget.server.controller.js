@@ -9,36 +9,36 @@ exports.insertRate = function (user_id, rest_id, rate) {
     Resturant.findOne({ _id: rest_id, "rates.user_id": user_id }, function (err, resturant) {
 
         // if not rate insert it
-            if (!resturant) {
-                console.log("not");
-                Resturant.update({ '_id': rest_id },
-                 { $push: { "rates": { "resturantVote": rate, "user_id": user_id } } },
-                 { upsert: true },
-            function () {}
-                 );
-            }
+        if (!resturant) {
+            console.log("not");
+            Resturant.update({ '_id': rest_id },
+             { $push: { "rates": { "resturantVote": rate, "user_id": user_id } } },
+             { upsert: true },
+        function () { }
+             );
+        }
 
-                // if he rate before delete it then insert the new(update)
-            else {
-                //delete or remove
-                Resturant.update(
-                { '_id': rest_id },
-                { $pull: { "rates": { "user_id": user_id } } },
-            false,
-            function () {
+            // if he rate before delete it then insert the new(update)
+        else {
+            //delete or remove
+            Resturant.update(
+            { '_id': rest_id },
+            { $pull: { "rates": { "user_id": user_id } } },
+        false,
+        function () {
 
-            }
-            );
-                //then insert te new rate 
-                Resturant.update({ '_id': rest_id },
-                 { $push: { "rates": { "resturantVote": rate, "user_id": user_id } } },
-                 { upsert: true },
-            function () { }
-                 );
+        }
+        );
+            //then insert te new rate 
+            Resturant.update({ '_id': rest_id },
+             { $push: { "rates": { "resturantVote": rate, "user_id": user_id } } },
+             { upsert: true },
+        function () { }
+             );
 
-            }
-        });
-    
+        }
+    });
+
     //console.log(u);
 
 
@@ -102,18 +102,26 @@ exports.insertRatee = function () {
 
 
 
-exports.GetAllResturants = function () {
-    Resturant.find({}, {}, {skip: 10,limit: 2    }, function (err, resturants) {
-        console.log(JSON.stringify(resturants));
+exports.GetAllResturants = function (req, res) {
+
+    eissa = Resturant.find({}, function (err, resturants) {
+    //eissa = Resturant.find({}, {}, { skip: 10, limit: 5 }, function (err, resturants) {
+
+        var model = { resturants: resturants }
+        //console.log(resturants);
+        //console.log(JSON.stringify(resturants))
+        res.render('test', model);
+
     });
 }
 
 
-exports.GetResturantById = function (rest_id) {
-    (Resturant.find({_id:rest_id},function (err, resturant){
-        console.log(resturant);
+exports.GetResturantById = function (req, res, rest_id) {
+    Resturant.find({ _id: rest_id }, function (err, resturant) {
+        var model = { resturant: resturant }
+        res.render('index', model);
     })
-    );
+
 }
 
 

@@ -11,9 +11,12 @@ router.get('/', function (req, res, next) {
 router.get('/eissa', function (req, res) {
     //itargetCtrl.insertRate("577230f0bb2f1b2e7ce995f0","57722ebcbb2f1b1af0000f68",10);
     //return itargetCtrl.createRest(req.body);
-    itargetCtrl.GetAllResturants();
+    //itargetCtrl.GetAllResturants(req, res);
+    res.render("test");
 
 });
+
+
 
 router.get('/getall', function (request, response) {
     //return response.end(JSON.stringify({"eissa":3.5}));

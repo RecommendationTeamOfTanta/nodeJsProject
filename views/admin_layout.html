@@ -73,6 +73,12 @@
 
 
 <div id="content" class="container" style="padding-top:100px">
+    {% for resturant in resturants %}
+    {% for obj in resturant.rates %}
+    <h2 data-eissa="{{obj.user_id}}">{{obj.user_id}}</h2>
+    {% endfor %}
+
+    {% endfor %}
     <div id="LoadingImage" style="display: none">
         <img src="img/loadingGif.gif" />
     </div>

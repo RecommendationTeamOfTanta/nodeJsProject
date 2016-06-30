@@ -1,0 +1,102 @@
+/** resets **/
+
+#topContainer {
+    background-image: url("../img/background.jpg");
+    width: 100%;
+    background-size: cover;
+    margin-right: 0;
+    
+}
+
+#ourCustomersContainer {
+    background-image: url("../img/clean.jpg");
+    width: 100%;
+    padding: 20px 100px 10px 100px;
+    background-size: cover;
+    background-color: rgba(0, 0, 0, .9);
+}
+
+#downloadAppContainer {
+    background-image: url("../img/clean.jpg");
+    width: 100%;
+    padding: 20px 100px 10px 100px;
+    background-size: cover;
+    background-color: rgba(0, 0, 0, .9);
+}
+
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 200%;
+}
+
+#topRow {
+    margin-top: 200px;
+    text-align: center;
+
+}
+
+#topRow h1 {
+    font-size: 300%;
+    color: #fff;
+
+}
+
+#topRow p {
+    color: #000000;
+}
+
+.center {
+    text-align: center;
+}
+
+.marginTop {
+    margin-top: 75px;
+}
+
+.marginTop2 {
+    margin-top: 160px;
+}
+
+.margin30 {
+    margin-top: 30px;
+}
+
+#reservationContainer {
+    background-color:coral;
+    width: 100%;
+    background-size: cover;
+    background-color: rgba(0, 0, 0, .4);
+}
+
+.marginBottom {
+    margin: 35px;
+}
+
+.appImage {
+    width: 400px;
+}
+
+#footer {
+   background-color: #e2e2e2;
+}
+
+
+.footerText {
+    margin-top: 10px;
+   }
+
+
+.thumbnail {
+    padding: 5px 100px;
+    background: none;
+    border: none;
+}
+
+.img-clean {
+    background-image: url(img/clean.jpg);
+}
+
+h1 {
+    color: #7b171f;
+}

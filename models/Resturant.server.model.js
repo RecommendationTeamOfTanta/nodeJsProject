@@ -5,6 +5,8 @@ var schema = mongoose.Schema;
 
 //users
 
+
+
 var userFeatures = new schema({
     //user_id: { type: schema.Types.ObjectId, ref: 'User' },
     couple: Boolean,
@@ -31,7 +33,6 @@ var userRatings = new schema({
 var usersSchema = new schema({
     name: {
         first: String,
-        middle: String,
         last: String
     },
     adress: String,
@@ -43,6 +44,7 @@ var usersSchema = new schema({
     mobile: String,
     role: String,
     favourites: [{ type: schema.Types.ObjectId, ref: 'Resturant' }],
+    wishlist:[{ type: schema.Types.ObjectId, ref: 'Resturant' }],
     userRatings: [userRatings],
     features: userFeatures,
 

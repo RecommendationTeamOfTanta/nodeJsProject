@@ -4,15 +4,19 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('client-sessions');
 
 //sessions through mongoDB
 //var mongoStore = require('connect-mongo')(express);
 
 var routes = require('./routes/index');
-//var users = require('./routes/users');
+var users = require('./routes/users');
+
+var signup = require('./routes/signup.js');
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://itarget:itarget@ds025792.mlab.com:25792/itarget');
+//mongoose.connect('mongodb://itarget:itarget@ds025792.mlab.com:25792/itarget');
+mongoose.connect('mongodb://localhost:27017/itargetLocal');
 var app = express();
 
 
@@ -36,7 +40,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-//app.use('/users', users);
+app.use('/users', users);
+app.use('/signup',signup)
+
+// session and cookies details
+app.use(session({
+    cookieName: 'session',
+    secret: 'random_string_goes_here',
+    duration: 30 * 60 * 1000
+}));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
