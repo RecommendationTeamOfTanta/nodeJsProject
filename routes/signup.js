@@ -5,7 +5,7 @@ var Resturant = models.Resturant;
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
+/*registeration*/
 router.get('/signup', function (req, res) {
     if (req.session && req.session.user) {
         res.redirect('/');
@@ -27,7 +27,7 @@ router.get('/signup', function (req, res) {
         role: "u"
     });
 
-    var eissas = theUser.save(function (err,user) {
+    var saveUser = theUser.save(function (err,user) {
         if(!err)
         {
             req.session.user = user;
@@ -63,15 +63,10 @@ router.get('/login', function (req, res) {
 });
 
 
-
-
-
-
-
-
-
-
-
+router.get('/logout', function (req, res) {
+    req.session.reset();
+    res.redirect('/login');
+});
 
 
 function requireLogin(req, res, next) {
@@ -81,13 +76,10 @@ function requireLogin(req, res, next) {
         next();
     }
 };
-router.get('/logout', function (req, res) {
-    req.session.reset();
-    res.redirect('/login');
-});
 
 router.get('/rate', requireLogin, function (req, res) {
     res.render('register/signin');
 });
+
 
 module.exports = router;
