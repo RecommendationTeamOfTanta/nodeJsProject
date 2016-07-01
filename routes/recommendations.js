@@ -11,7 +11,8 @@ router.get('/get-recommendation', function (req, res) {
     var request = require('request');
     request('http://eissa3101652.pythonanywhere.com/itarget/getrecommendation?user_id=3a99416c771c72c6c5640e8b032deac3', function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            console.log(body)
+            //console.log(body)
+            res.send(body);
         }
     })
     ////// for posting
@@ -33,7 +34,7 @@ router.get('/get-recommendation2', function (req, res) {
 
         response.on("end", function () {
             //console.log(finalData.length);
-            console.log(finalData.toString());
+            res.send(finalData.toString());
         });
 
     });
