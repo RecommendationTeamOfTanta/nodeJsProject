@@ -14,6 +14,7 @@ var users = require('./routes/users');
 
 var signup = require('./routes/signup.js');
 
+var recommendation = require('./routes/recommendations.js');
 var mongoose = require('mongoose');
 //mongoose.connect('mongodb://itarget:itarget@ds025792.mlab.com:25792/itarget');
 mongoose.connect('mongodb://localhost:27017/itarget');
@@ -25,7 +26,7 @@ var swig = require('swig');
 app.engine('html', swig.renderFile)
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'html');
 
 //session
@@ -36,7 +37,11 @@ app.use(session({
     activeDuration: 5 * 60 * 1000
 }));
 
+
+//to prevent 304 status code
 app.use(function (req, res, next) {
+    //res.setHeader('Last-Modified', (new Date()).toUTCString());
+    req.headers['if-none-match'] = 'no-match-for-this';
     if (req.session && req.session.user) {
         res.locals.login = true;
         res.locals.user = req.session.user;
@@ -46,6 +51,8 @@ app.use(function (req, res, next) {
         next();
     }
 });
+
+
 
 
 // uncomment after placing your favicon in /public
@@ -59,7 +66,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/', signup)
+app.use('/', signup);
+app.use('/', recommendation);
+
 
 // session and cookies details
 

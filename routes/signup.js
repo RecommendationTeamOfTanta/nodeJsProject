@@ -10,11 +10,9 @@ router.get('/signup', function (req, res) {
     if (req.session && req.session.user) {
         res.redirect('/');
     } else {
-        res.render("signup");
+        res.render("register/signup");
     }
-});
-
-router.post('/signup', function (req, res) {
+}).post('/signup', function (req, res) {
     var theUser = new User({
         name: {
             first: req.body.first,
@@ -29,7 +27,14 @@ router.post('/signup', function (req, res) {
         role: "u"
     });
 
-    theUser.save();
+    var eissas = theUser.save(function (err,user) {
+        if(!err)
+        {
+            req.session.user = user;
+            res.redirect('/eissa');
+        }
+
+    });
 
 });
 
@@ -37,28 +42,36 @@ router.get('/login', function (req, res) {
     if (req.session && req.session.user) {
         res.redirect('/');
     } else {
-        res.render("signin")
+        res.render("register/signin")
     }
-});
-
-
-
-
-router.post('/login', function (req, res) {
+}).post('/login', function (req, res) {
     User.findOne({ theEmail: req.body.mail }, function (err, user) {
         if (!user) {
-            res.render('signin', { error: 'Invalid email or password.' });
+            res.render('register/signin', { error: 'Invalid email or password.' });
         } else {
             if (req.body.password === user.password) {
                 // sets a cookie with the user's info
                 req.session.user = user;
+                delete req.session.user.password;
                 res.redirect('/eissa');
             } else {
-                res.render('signin', { error: 'Invalid email or password.' });
+                res.render('register/signin', { error: 'Invalid email or password.' });
             }
         }
+
     });
 });
+
+
+
+
+
+
+
+
+
+
+
 
 
 function requireLogin(req, res, next) {
@@ -74,7 +87,7 @@ router.get('/logout', function (req, res) {
 });
 
 router.get('/rate', requireLogin, function (req, res) {
-    res.render('/signin');
+    res.render('register/signin');
 });
 
 module.exports = router;
