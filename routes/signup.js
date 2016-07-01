@@ -7,7 +7,11 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/signup', function (req, res) {
-    res.render("signup")
+    if (req.session && req.session.user) {
+        res.redirect('/');
+    } else {
+        res.render("signup");
+    }
 });
 
 router.post('/signup', function (req, res) {
@@ -48,7 +52,7 @@ router.post('/login', function (req, res) {
             if (req.body.password === user.password) {
                 // sets a cookie with the user's info
                 req.session.user = user;
-                res.redirect('/');
+                res.redirect('/eissa');
             } else {
                 res.render('signin', { error: 'Invalid email or password.' });
             }
@@ -66,7 +70,7 @@ function requireLogin(req, res, next) {
 };
 router.get('/logout', function (req, res) {
     req.session.reset();
-    res.redirect('/');
+    res.redirect('/login');
 });
 
 router.get('/rate', requireLogin, function (req, res) {

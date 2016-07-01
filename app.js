@@ -39,6 +39,7 @@ app.use(session({
 app.use(function (req, res, next) {
     if (req.session && req.session.user) {
         res.locals.login = true;
+        res.locals.user = req.session.user;
         next();
     } else {
         res.locals.login = false;
