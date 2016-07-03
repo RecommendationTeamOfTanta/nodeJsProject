@@ -1,5 +1,6 @@
 ﻿var mongoose = require('mongoose');
 var schema = mongoose.Schema;
+var bcrypt = require('bcrypt');
 
 
 
@@ -37,7 +38,7 @@ var usersSchema = new schema({
     },
     adress: String,
     theEmail: String,
-    password: String,
+    password: { type: String,bcrypt:true},
     picture: String,
     birthDate: { type: Date },
     gender: String,
@@ -141,6 +142,7 @@ var resturantFeatures = new schema({
 
 // create the resturantschema
 var resturantSchema = new schema({
+    addedBy: { type: schema.Types.ObjectId, ref: 'User' },
     name: String,
     description: String,
     photo: String,
@@ -178,7 +180,25 @@ var Rate = mongoose.model('Rate', resturantRateSchema);
 module.exports = {
     User: User,
     Resturant: Resturant,
-    Rate: Rate
-    //Branch:Branch
-};
+    Rate: Rate,
+    createUser: function (newUser, callback) {
+        bcrypt.hash(newUser.password, 10, function (err, hash) {
+            if (!err) {
+                newUser.password = hash;
+                newUser.save(callback);
+
+            }
+        });
+    },
+    comparePassword: function (password, hash, callback) {
+        bcrypt.compare(password, hash, function (err, isPasswordMatch) {
+            if (err)
+                return callback(err);
+            return callback(null, isPasswordMatch);
+        });
+    },
+    createResturant: function (newResturant,callback) {
+        newResturant.save(callback);
+    }
+}
 

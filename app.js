@@ -6,6 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const session = require("client-sessions");
 var multipart = require('connect-multiparty');
+var expressValidator = require('express-validator');
+var flash = require('connect-flash');
+
 
 //sessions through mongoDB
 //var mongoStore = require('connect-mongo')(express);
@@ -31,6 +34,11 @@ app.engine('html', swig.renderFile)
 app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'html');
 
+
+
+
+
+
 //session
 app.use(session({
     cookieName: 'session',
@@ -38,6 +46,8 @@ app.use(session({
     duration: 30 * 60 * 1000,
     activeDuration: 5 * 60 * 1000
 }));
+
+app.use(flash());
 
 
 //to prevent 304 status code
@@ -60,6 +70,7 @@ app.use(function (req, res, next) {
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(bodyParser());
+app.use(expressValidator()); // this line must be immediately after express.bodyParser()!
 app.use(multipart());
 app.use(logger('dev'));
 app.use(bodyParser.json());

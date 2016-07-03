@@ -1,27 +1,10 @@
 ﻿<html>
+<head>
+    <title>Node.js OAuth</title>
+</head>
 <body>
-    <form method="post" enctype="multipart/form-data" action="/addresturant">
-
-        <label for="inputname">Name</label>
-        <input type="text" class="form-control" name="name" id="inputname" placeholder="Your Name">
-        <label for="inputname1">desc</label>
-        <input type="text" class="form-control" name="description" id="inputname1" placeholder="Your Name">
-        <label for="inputname2">location</label>
-        <input type="text" class="form-control" name="location" id="inputname2" placeholder="Your Name">
-        <label for="inputname3">mobile</label>
-        <input type="text" class="form-control" name="mobile" id="inputname3" placeholder="Your Name">
-        <label for="inputname4">start</label>
-        <input type="text" class="form-control" name="startat" id="inputname4" placeholder="Your Name">
-        <label for="inputname5">end</label>
-        <input type="text" class="form-control" name="endat" id="inputname5" placeholder="Your Name">
-
-        <label for="inputname6">branchs</label>
-        <input type="text" class="form-control" name="branches" id="inputname6" placeholder="Your Name">
-
-        <input type="file" name="thumbnail">
-        <input type="submit">
-    </form>
-
-    <img src="./uploads/resturants/w e.png" />
+    <h1><a href="/auth/facebook">Sign in with Facebook</a></h1>
+    <br />
+    <a href="/auth/github">Sign in with Github</a>
 </body>
 </html>

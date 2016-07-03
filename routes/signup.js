@@ -10,7 +10,7 @@ router.get('/signup', function (req, res) {
     if (req.session && req.session.user) {
         res.redirect('/');
     } else {
-        res.render("register/signup");
+        res.render("register/signup", { title: 'Sign up' });
     }
 }).post('/signup', function (req, res) {
     console.log(req);
@@ -28,14 +28,13 @@ router.get('/signup', function (req, res) {
         role: "u"
     });
 
-    var saveUser = theUser.save(function (err,user) {
-        if(!err)
-        {
+    models.createUser(theUser, function (err, user) {
+        if (!err) {
             req.session.user = user;
             res.redirect('/eissa');
         }
-
     });
+
 
 });
 
@@ -43,21 +42,45 @@ router.get('/login', function (req, res) {
     if (req.session && req.session.user) {
         res.redirect('/');
     } else {
-        res.render("register/signin")
+        res.render("register/signin", { title: 'Login' })
     }
 }).post('/login', function (req, res) {
-    User.findOne({ theEmail: req.body.mail }, function (err, user) {
+    var mail = req.body.mail;
+    var password = req.body.password;
+
+    //req.checkBody('mail', 'enter the email').notEmpty();
+    //req.checkBody('mail', 'email not valid ').notEmpty();
+    //req.checkBody('password', 'enter the password').notEmpty();
+
+    //var errors = req.validationErrors();
+    //if (errors) {
+    //    res.render('register/signin', {
+    //        errors: errors,
+    //        mail: mail,
+    //        password:password
+    //    });
+    //} else {
+    //    req.flash('success', 'logged in successfully');
+    //    res.redirect('/');
+    //}
+
+    User.findOne({ theEmail: mail }, function (err, user) {
         if (!user) {
-            res.render('register/signin', { error: 'Invalid email or password.' });
+            res.render('register/signin', { title: 'Login' });
         } else {
-            if (req.body.password === user.password) {
-                // sets a cookie with the user's info
-                req.session.user = user;
-                delete req.session.user.password;
-                res.redirect('/eissa');
-            } else {
-                res.render('register/signin', { error: 'Invalid email or password.' });
-            }
+            //compare between the user password and the hash
+            models.comparePassword(req.body.password, user.password, function (err, isMatch) {
+                console.log(isMatch);
+                if (isMatch) {
+                     //sets a cookie with the user's info
+                        req.session.user = user;
+                        delete req.session.user.password;
+                        res.redirect('/eissa');
+                } else {
+                    res.render('register/signin', { title: 'Login' });
+                }
+            })
+           
         }
 
     });
@@ -66,7 +89,7 @@ router.get('/login', function (req, res) {
 
 router.get('/logout', function (req, res) {
     req.session.reset();
-    res.redirect('/login');
+    res.render('register/signin', { title: 'Login' });
 });
 
 

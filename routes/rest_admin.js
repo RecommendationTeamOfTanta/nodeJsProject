@@ -18,9 +18,9 @@ var fs = require("fs");
 router.get('/add-resturant', function (req, res) {
     if (req.session && req.session.user) {
 
-        res.render("rest_admin/add-resturant");
+        res.render("rest_admin/add-resturant", { title: "add-resturant" });
     } else {
-        res.render("register/signin");
+        res.render("register/signin",{title:"Login"});
     }
 }).post('/addresturant', function (req, res) {
     fs.readFile(req.files.thumbnail.path, function (err, data) {
@@ -38,6 +38,7 @@ router.get('/add-resturant', function (req, res) {
             if (!err) {
                 console.log(branchs);
                 var theResturant = new Resturant({
+                    addedBy:req.session.user._id,
                     name: req.body.name,
                     description: req.body.description,
                     photo: theDbPhoto,
@@ -52,7 +53,7 @@ router.get('/add-resturant', function (req, res) {
                 var save = theResturant.save(function (err, rest) {
                     if (!err)
                     {
-                        res.redirect('/resturant-features');
+                        res.render('/resturant-features', { title: "resturant-features" });
                     }
                 });
             }
