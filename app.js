@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const session = require("client-sessions");
+var multipart = require('connect-multiparty');
 
 //sessions through mongoDB
 //var mongoStore = require('connect-mongo')(express);
@@ -13,6 +14,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var signup = require('./routes/signup.js');
+var admin_rest = require('./routes/rest_admin.js');
 
 var recommendation = require('./routes/recommendations.js');
 var mongoose = require('mongoose');
@@ -57,10 +59,19 @@ app.use(function (req, res, next) {
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(bodyParser());
+app.use(multipart());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+
+
+
+
+
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -68,6 +79,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/', signup);
 app.use('/', recommendation);
+app.use('/', admin_rest);
 
 
 // session and cookies details

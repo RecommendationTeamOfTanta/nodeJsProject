@@ -1,0 +1,124 @@
+﻿{% extends '../layout_master.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" type="text/css" media="all" href="../css/style.css">
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.leanModal.min.js"></script>
+
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+
+
+{% endblock %}
+{% block title %}iTarget - Add resturant{% endblock %}
+
+<br>
+{% block body content %}
+
+<div class="container bg-col">
+    <div class="col-md-6">
+
+
+        <h1 style="margin-bottom: 10px;" class="center">Restaurant Products</h1>
+        <p class="lead center">This page can be modified anytime</p>
+        <br>
+
+        <div class="input-group" style="">
+            <span class="input-group-addon" id="step2">Step One</span>
+            <span class="input-group-addon" id="step3">Step Two</span>
+            <span style="background-color: #7b171f; color: #ffffff; font-size: 16px;" class="input-group-addon" id="step1">Step Three <span class="glyphicon glyphicon-forward"></span></span>
+        </div>
+
+
+        <br>
+        <form class="form-border" action="" method="post">
+            <h2>Categories</h2>
+            <div class="form-group margin-Top">
+                <label for="inputname">Category Name</label>
+                <input type="text" class="form-control" id="inputcat" placeholder="Category Name">
+                <button style="color: #fff;" type="submit" class="btn btn-block img-clean">Add Category</button>
+            </div>
+
+        </form>
+        <br>
+
+
+        <form class="form-border" action="" method="post">
+            <h2>Products</h2>
+
+            <div class="form-group margin-Top">
+                <label for="inputProductname">Product Name</label>
+                <input type="text" class="form-control" id="inputProductname" placeholder="Product Name">
+            </div>
+
+            <div class="form-group">
+                <label for="comment">Product Description</label>
+                <textarea class="form-control" rows="6" id="comment"></textarea>
+
+            </div>
+
+            <div class="form-group">
+                <label for="comment">Product Size &amp; Price</label>
+                <textarea class="form-control" rows="6" id="comment"></textarea>
+            </div>
+            <div class="alert alert-info" role="alert" style="font-size: 16px;">
+                Seperate size &amp; price using<strong> " : "</strong>. Seperate each line using <strong> " , "</strong><br>
+                <strong>Example: </strong>"Large: 45L.E, Medium: 30L.E,..."
+            </div>
+
+            <div class="form-group">
+                <label for="inputlogo">Product Image</label>
+                <input type="file" id="inputlogo">
+                <p class="help-block">upload your product image for the community.</p>
+            </div>
+
+
+
+            <div class="form-group margin-Top">
+                <label for="inputcat">Product Category</label>
+                <div class="dropdown">
+                    <button style="" class="btn btn-default btn-small dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Italian Pizza
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+
+            <button style="color: #fff;" type="submit" class="btn btn-block img-clean">Add Product</button>
+
+        </form>
+    </div>
+
+    <div class="col-md-5 col-md-offset-1">
+        <h2 class="center" style="color: #7b171f">Benefits of adding your Restaurant</h2>
+
+        <div>
+            <img src="img/flyers.jpg" width="100">
+        </div>
+        <br>
+        <div class="row">
+            <p><strong>More Visitors</strong><br>People Discovering your places.</p>
+            <!--                    <p><strong>Your Favorite List</strong><br>Track every place you want to go and receive notifications when there are new things to do there.</p>-->
+            <p><strong>Your Ratings</strong><br>People who visited your website rate it over here and you can see it all.</p>
+            <p><strong>Community</strong><br>Discuss with customers thier Reviews about your places wheather it's good or bad.</p>
+            <p><strong>Contribute to Society</strong><br>Flag a problem or report a restuarant abuse.</p>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

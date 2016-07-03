@@ -13,6 +13,7 @@ router.get('/signup', function (req, res) {
         res.render("register/signup");
     }
 }).post('/signup', function (req, res) {
+    console.log(req);
     var theUser = new User({
         name: {
             first: req.body.first,

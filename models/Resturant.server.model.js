@@ -96,13 +96,13 @@ var resturantReviewSchema = new schema({
     review_date: { type: Date, default: Date.now }
 });
 
-var brancheSchema = new schema({
-    name: String,
-    city: String,
-    latitude: Number,
-    longitude: Number,
-    //rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' }
-});
+//var brancheSchema = new schema({
+//    name: String,
+//    city: String,
+//    latitude: Number,
+//    longitude: Number,
+//    //rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' }
+//});
 var resturantFeatures = new schema({
     //rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' },
     famous: Boolean,
@@ -150,7 +150,7 @@ var resturantSchema = new schema({
         startAt: String,
         endAt: String
     },
-    branches: [brancheSchema],
+    branches: [String],
     features: resturantFeatures,
     categories: [CategorySchema],
     rates: [resturantRateSchema],

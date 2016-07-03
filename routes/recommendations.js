@@ -41,6 +41,11 @@ router.get('/get-recommendation2', function (req, res) {
 
 });
 
+router.get('/sentiment/:review', function (req, res) {
+    var sentimentAnalysis = require('sentiment-analysis');
+    var review = req.params.review;
+    console.log(sentimentAnalysis(review));
+});
 
 
 module.exports = router;
