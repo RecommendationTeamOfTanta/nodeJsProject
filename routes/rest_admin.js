@@ -11,7 +11,7 @@ http = require('http'),
     util = require('util');
 var fs = require("fs");
 
-
+eis='44'
 
 
 //add resturant
@@ -106,11 +106,11 @@ router.post('/add-rest-futures/:rest_id', function (req, res) {
 
 router.get('/cat-prod', function (req, res) {
     if (req.session && req.session.user) {
-        res.render('rest_admin/cat-prod');
 
         User.findOne({ _id: req.session.user.id }, function (err, user) {
             var userResturants = user.resturants;
-            resturant.save();
+            res.render('rest_admin/cat-prod', {resturants:userResturants});
+
         });
 
     } else {
