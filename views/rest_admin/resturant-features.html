@@ -21,101 +21,189 @@
 {% block body content %}
 
 <div class="container bg-col">
-    <div class="col-md-6">
+    <div class="row">
+        <div class="col-md-6">
 
+            <form class="form-border" action="/add-rest-futures/{{rest_id}}" method="post">
+                <h1 style="margin-bottom: 10px;" class="center">Restaurant Features</h1>
+                <br>
 
-        <h1 style="margin-bottom: 10px;" class="center">Restaurant Products</h1>
-        <p class="lead center">This page can be modified anytime</p>
-        <br>
-
-        <div class="input-group" style="">
-            <span class="input-group-addon" id="step2">Step One</span>
-            <span class="input-group-addon" id="step3">Step Two</span>
-            <span style="background-color: #7b171f; color: #ffffff; font-size: 16px;" class="input-group-addon" id="step1">Step Three <span class="glyphicon glyphicon-forward"></span></span>
-        </div>
-
-
-        <br>
-        <form class="form-border" action="" method="post">
-            <h2>Categories</h2>
-            <div class="form-group margin-Top">
-                <label for="inputname">Category Name</label>
-                <input type="text" class="form-control" id="inputcat" placeholder="Category Name">
-                <button style="color: #fff;" type="submit" class="btn btn-block img-clean">Add Category</button>
-            </div>
-
-        </form>
-        <br>
-
-
-        <form class="form-border" action="" method="post">
-            <h2>Products</h2>
-
-            <div class="form-group margin-Top">
-                <label for="inputProductname">Product Name</label>
-                <input type="text" class="form-control" id="inputProductname" placeholder="Product Name">
-            </div>
-
-            <div class="form-group">
-                <label for="comment">Product Description</label>
-                <textarea class="form-control" rows="6" id="comment"></textarea>
-
-            </div>
-
-            <div class="form-group">
-                <label for="comment">Product Size &amp; Price</label>
-                <textarea class="form-control" rows="6" id="comment"></textarea>
-            </div>
-            <div class="alert alert-info" role="alert" style="font-size: 16px;">
-                Seperate size &amp; price using<strong> " : "</strong>. Seperate each line using <strong> " , "</strong><br>
-                <strong>Example: </strong>"Large: 45L.E, Medium: 30L.E,..."
-            </div>
-
-            <div class="form-group">
-                <label for="inputlogo">Product Image</label>
-                <input type="file" id="inputlogo">
-                <p class="help-block">upload your product image for the community.</p>
-            </div>
-
-
-
-            <div class="form-group margin-Top">
-                <label for="inputcat">Product Category</label>
-                <div class="dropdown">
-                    <button style="" class="btn btn-default btn-small dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Italian Pizza
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                    </ul>
+                <div class="input-group" style="">
+                    <span class="input-group-addon" id="step2">Step One</span>
+                    <span style="background-color: #7b171f; color: #ffffff; font-size: 16px;" class="input-group-addon" id="step1">Step Two <span class="glyphicon glyphicon-forward"></span></span>
                 </div>
-            </div>
+
+                <br>
+
+                <div class="form-group">
+                    <label for="inputsmoker">Wifi</label>
+                    <div class="form-group" style="font-size: 15px;">
+                        <label class="radio-inline">
+                            <input type="radio" name="wifi" id="yesWifi" value="true"> Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="wifi" id="noWifi" value="false"> No
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputsmoker">Smoking Area</label>
+                    <div class="form-group" style="font-size: 15px;">
+                        <label class="radio-inline">
+                            <input type="radio" name="smoker" id="yesSmokingRadio" value="true"> Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="smoker" id="noSmokingRadio" value="false"> No
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputsmoker">Children Area</label>
+                    <div class="form-group" style="font-size: 15px;">
+                        <label class="radio-inline">
+                            <input type="radio" name="children" id="yesChildrenRadio" value="true"> Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="children" id="noChildrenRadio" value="false"> No
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputsmoker">Minimum Charge</label>
+                    <div class="form-group" style="font-size: 15px;">
+                        <label class="radio-inline">
+                            <input type="radio" name="minimum" id="yesMinimumCharge" value="true"> Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="minimum" id="NoMinimumCharge" value="false"> No
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputsmoker">Delivery</label>
+                    <div class="form-group" style="font-size: 15px;">
+                        <label class="radio-inline">
+                            <input type="radio" name="delivery" id="yesDelivery" value="true"> Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="delivery" id="NoDelivery" value="false"> No
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputsmoker">Parties Availablitiy</label>
+                    <div class="form-group" style="font-size: 15px;">
+                        <label class="radio-inline">
+                            <input type="radio" name="parties" id="yesParties" value="true"> Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="parties" id="NoParties" value="false"> No
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputsmoker">Credit Card Acceptance</label>
+                    <div class="form-group" style="font-size: 15px;">
+                        <label class="radio-inline">
+                            <input type="radio" name="credit" id="yesCredit" value="true"> Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="credit" id="NoCredit" value="false"> No
+                        </label>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="inputsmoker">Outdoor Seats</label>
+                    <div class="form-group" style="font-size: 15px;">
+                        <label class="radio-inline">
+                            <input type="radio" name="outdoor" id="yesOutdoor" value="true"> Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="outdoor" id="NoOutdoor" value="false"> No
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputsmoker">Car Barking</label>
+                    <div class="form-group" style="font-size: 15px;">
+                        <label class="radio-inline">
+                            <input type="radio" name="car" id="yesCar" value="true"> Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="car" id="NoCar" value="false"> No
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputsmoker">TV Cable</label>
+                    <div class="form-group" style="font-size: 15px;">
+                        <label class="radio-inline">
+                            <input type="radio" name="tv" id="yesTV" value="true"> Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="tv" id="NoTV" value="false"> No
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputsmoker">Reservation</label>
+                    <div class="form-group" style="font-size: 15px;">
+                        <label class="radio-inline">
+                            <input type="radio" name="reservation" id="yesReservation" value="true"> Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="reservation" id="NoReservation" value="false"> No
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputsmoker">Books To Read</label>
+                    <div class="form-group" style="font-size: 15px;">
+                        <label class="radio-inline">
+                            <input type="radio" name="bookToRead" id="yesBooks" value="true"> Yes
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="bookToRead" id="NoBooks" value="false"> No
+                        </label>
+                    </div>
+                </div>
+
+                
 
 
 
 
-            <button style="color: #fff;" type="submit" class="btn btn-block img-clean">Add Product</button>
 
-        </form>
-    </div>
-
-    <div class="col-md-5 col-md-offset-1">
-        <h2 class="center" style="color: #7b171f">Benefits of adding your Restaurant</h2>
-
-        <div>
-            <img src="img/flyers.jpg" width="100">
+                <button type="submit" style="margin: 10px auto;" class="btn btn-primary btn-lg btn-block img-clean">Proceed to next step</button>
+            </form>
         </div>
-        <br>
-        <div class="row">
-            <p><strong>More Visitors</strong><br>People Discovering your places.</p>
-            <!--                    <p><strong>Your Favorite List</strong><br>Track every place you want to go and receive notifications when there are new things to do there.</p>-->
-            <p><strong>Your Ratings</strong><br>People who visited your website rate it over here and you can see it all.</p>
-            <p><strong>Community</strong><br>Discuss with customers thier Reviews about your places wheather it's good or bad.</p>
-            <p><strong>Contribute to Society</strong><br>Flag a problem or report a restuarant abuse.</p>
+
+        <div class="col-md-5 col-md-offset-1">
+            <h2 class="center" style="color: #7b171f">Benefits of adding your Restaurant</h2>
+
+            <div>
+                <img src="img/flyers.jpg" width="100">
+            </div>
+            <br>
+            <div class="row">
+                <p><strong>More Visitors</strong><br>People Discovering your places.</p>
+                <!--                    <p><strong>Your Favorite List</strong><br>Track every place you want to go and receive notifications when there are new things to do there.</p>-->
+                <p><strong>Your Ratings</strong><br>People who visited your website rate it over here and you can see it all.</p>
+                <p><strong>Community</strong><br>Discuss with customers thier Reviews about your places wheather it's good or bad.</p>
+                <p><strong>Contribute to Society</strong><br>Flag a problem or report a restuarant abuse.</p>
+            </div>
         </div>
     </div>
 </div>

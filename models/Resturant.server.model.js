@@ -48,7 +48,7 @@ var usersSchema = new schema({
     wishlist:[{ type: schema.Types.ObjectId, ref: 'Resturant' }],
     userRatings: [userRatings],
     features: userFeatures,
-
+    resturants: [{ type: schema.Types.ObjectId, ref: 'Resturant' }],
     //the recommendation for the user(user-based)
     recommended_resturants: [{
         rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' },
@@ -79,7 +79,6 @@ var productSchema = new schema({
 var CategorySchema = new schema({
     name: String,
     type: String,
-    photo: String,
     products: [productSchema]
 });
 
@@ -105,7 +104,6 @@ var resturantReviewSchema = new schema({
 //    //rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' }
 //});
 var resturantFeatures = new schema({
-    //rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' },
     famous: Boolean,
     smokingArea: Boolean,
     placeForChildren: Boolean,
@@ -117,7 +115,7 @@ var resturantFeatures = new schema({
     noiseLevel: String,
     stuffBehavior: String,
     acceptCreditCard: Boolean,
-    outDoorSetting: String,
+    outDoorSetting: Boolean,
     hasTv: Boolean,
     carBarking: Boolean,
     reservation: Boolean,
@@ -133,7 +131,8 @@ var resturantFeatures = new schema({
     openPuffet: Boolean,
     alchols: Boolean,
     lightiningRomantic: Boolean,
-    publicToilets: Boolean
+    publicToilets: Boolean,
+    _id:false
 
 
 
@@ -143,6 +142,7 @@ var resturantFeatures = new schema({
 // create the resturantschema
 var resturantSchema = new schema({
     addedBy: { type: schema.Types.ObjectId, ref: 'User' },
+    approved:{ type: Boolean, default: false },
     name: String,
     description: String,
     photo: String,

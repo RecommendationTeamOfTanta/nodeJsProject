@@ -14,15 +14,15 @@ var fs = require("fs");
 
 
 
-
+//add resturant
 router.get('/add-resturant', function (req, res) {
     if (req.session && req.session.user) {
 
         res.render("rest_admin/add-resturant", { title: "add-resturant" });
     } else {
-        res.render("register/signin",{title:"Login"});
+        res.render("register/signin", { title: "Login" });
     }
-}).post('/addresturant', function (req, res) {
+}).post('/add-resturant', function (req, res) {
     fs.readFile(req.files.thumbnail.path, function (err, data) {
 
         var dir = './public/uploads/resturants';
@@ -32,13 +32,11 @@ router.get('/add-resturant', function (req, res) {
         var newPath = path.resolve('./public/uploads/resturants/' + req.files.thumbnail.name);
         var theDbPhoto = path.join('uploads/resturants/', req.files.thumbnail.name);
         var branchs = req.body.branches.split(",");
-        console.log(req.body.agree);
-        console.log(req.body.agree1);
+        //upload the photo
         fs.writeFile(newPath, data, function (err) {
             if (!err) {
-                console.log(branchs);
                 var theResturant = new Resturant({
-                    addedBy:req.session.user._id,
+                    addedBy: req.session.user._id,
                     name: req.body.name,
                     description: req.body.description,
                     photo: theDbPhoto,
@@ -50,12 +48,23 @@ router.get('/add-resturant', function (req, res) {
                     },
                     branches: branchs
                 });
+                //insert the resturant
                 var save = theResturant.save(function (err, rest) {
-                    if (!err)
-                    {
-                        res.render('/resturant-features', { title: "resturant-features" });
+                    if (!err) {
+                        //push the resturant id into user.resturant (array)
+                        User.findOne({ _id: req.session.user._id }, function (err, user) {
+                            if (user) {
+                                User.update({ '_id': req.session.user._id },
+                                 { $push: { "resturants": rest._id } },
+                                 { upsert: true },
+                            function () { }
+                            );
+                            }
+                        });
+                        res.render('rest_admin/resturant-features', { rest_id: rest.id });
                     }
                 });
+
             }
         });
     });
@@ -67,17 +76,46 @@ router.get('/add-resturant', function (req, res) {
 
 });
 
+//insert the resturant futures
+router.post('/add-rest-futures/:rest_id', function (req, res) {
+    var rest_id = req.params.rest_id;
+    var rest_futures = {
+        smokingArea: req.body.smoker,
+        placeForChildren: req.body.children,
+        minimumCharge: req.body.minimum,
+        delivery: req.body.delivery,
+        wifi: req.body.wifi,
+        makeSmallParties: req.body.parties,
+        acceptCreditCard: req.body.credit,
+        outDoorSetting: req.body.outdoor,
+        hasTv: req.body.tv,
+        carBarking: req.body.car,
+        reservation: req.body.reservation,
+        bookToRead: req.body.bookToRead
+    };
 
-router.post('/upload', function (req, res, next) {
+    Resturant.findOne({ _id: rest_id }, function (err, resturant) {
+        resturant.features = rest_futures;
+        resturant.save();
+    });
+
+
+})
 
 
 
+router.get('/cat-prod', function (req, res) {
+    if (req.session && req.session.user) {
+        res.render('rest_admin/cat-prod');
 
-});
+        User.findOne({ _id: req.session.user.id }, function (err, user) {
+            var userResturants = user.resturants;
+            resturant.save();
+        });
 
-
-router.get('/upload', function (req, res) {
-    res.render('rest_admin/upload');
+    } else {
+        res.redirect('/login');
+    }
 });
 
 
