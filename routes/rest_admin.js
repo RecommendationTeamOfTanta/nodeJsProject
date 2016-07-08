@@ -237,13 +237,8 @@ router.get('/add-prod', function (req, res) {
 
       }
 });
+    
 
-router.post('/ratee*',function(req,res){
-    var rate = req.body.rate;
-    var pid = req.body.id;
-    console.log(rate);
-    console.log(pid);
-});
 
 //to adjust the price-size string to the be object
 function adjustSizePrice(sizePriceString) {

@@ -26,7 +26,9 @@ var userFeatures = new schema({
 
 var userRatings = new schema({
     rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' },
-    resturantVote: Number
+    resturantVote: Number,
+    _id: false
+
 
 });
 

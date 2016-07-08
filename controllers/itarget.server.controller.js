@@ -53,67 +53,7 @@ exports.insertRate = function (user_id, rest_id, rate) {
 }
 
 
-exports.insertRatee = function () {
-    var rate = new Rate({
-        user_id: "5769763a93fbdd4447280742",
-        rest_id: "576c35b2aec1b74c4f8ff0f4",
-        resturantVote: 5
-    });
 
-
-    // we use update there to prevent duplicate rating for from the the user to the same resturant
-    Rate.update({ $and: [{ user_id: rate.user_id }, { rest_id: rate.rest_id }] },
-            { $set: { resturantVote: rate.resturantVote } },
-            { upsert: true },
-            function () { }
-  );
-
-    ////////////////////////////
-    //        Resturant.find(
-    //{
-    //    "rates": { $elemMatch: { "rest_id": rate.rest_id, "rest_id": rate.userId } }
-    //}).forEach(function (item) {
-    //    console.log(item)
-
-    //});
-    //////////////////////////////
-
-
-    //      Resturant.update({ _id: rate.rest_id },
-    //             { "$push": { "rates": { "resturantVote": rate.resturantVote, "user_id": rate.user_id } } }
-    //);
-
-    //      console.log("done");
-
-    //      Resturant.update(
-    // { _id: "576c35b2aec1b74c4f8ff0f4" },
-    // {},
-    //{
-    //    upsert: true
-    //}
-    //);
-    //      //rate.save();
-    //      //resturant.rates.push(rate);
-    //      //resturant.save();
-    //});
-
-
-}
-
-
-
-exports.GetAllResturants = function (req, res) {
-
-    eissa = Resturant.find({}, function (err, resturants) {
-    //eissa = Resturant.find({}, {}, { skip: 10, limit: 5 }, function (err, resturants) {
-
-        var model = { resturants: resturants }
-        //console.log(resturants);
-        //console.log(JSON.stringify(resturants))
-        res.render('test', model);
-
-    });
-}
 
 
 exports.GetResturantById = function (req, res, rest_id) {
