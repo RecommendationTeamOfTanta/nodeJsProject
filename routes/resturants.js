@@ -7,26 +7,32 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/resturant/:rest_id', function (req, res) {
- Resturant.findOne({_id:req.params.rest_id}, function (err, resturant) {
-                reviewsNumber= resturant.reviews.length
-                 res.render('rest', {rest:resturant,reviewsNumber:reviewsNumber});
+    var rest_id = req.params.rest_id;
+    Resturant.findOne({_id:rest_id}, function (err, resturant) {
+                    reviewsNumber= resturant.reviews.length;
+                    if(req.session && req.session.user){
+                        User.findOne({_id:req.session.user._id},{userRatings:{$elemMatch:{rest_id:rest_id}}},function(err,user){
+                            res.render('rest', {rest:resturant,reviewsNumber:reviewsNumber,userVote:user.userRatings[0].resturantVote});
+                        });
+                    }
+                    else{
+                        res.render('rest', {rest:resturant,reviewsNumber:reviewsNumber});
+                    }
+                });
 
-
-
-            });
-
-});
+    });
 
 router.post('/rate*',function(req,res){
     if(req.session && req.session.user){
         var rate = req.body.rate;
         var rest_id = req.body.id;
         var user_id = req.session.user._id;
-        AddRate(user_id,rest_id,rate)
-
+        AddRate(user_id,rest_id,rate);
+        res.setHeader('Content-Type','application/json');
+        res.send(JSON.stringify({msg:"success",rate:rate}));
     }else{
-        res.setHeader('Content-Type', 'application/json');
-        res.    send(JSON.stringify("login"));
+        res.setHeader('Content-Type','application/json');
+        res.send(JSON.stringify("login"));
     }
 });
 

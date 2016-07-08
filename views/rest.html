@@ -27,7 +27,9 @@
             <div class="row">
                 <div class="col-md-6">
                     <h1 style="color: #7b171f;">{{rest.name}}</h1>
-                    <input data-pid="{{rest.id}}" id="rest-rate" type="number"  min=.1 max=5 step=0.1  class="rating" data-show-clear="true" data-show-caption="true" data-size="lg"><span>{{reviewsNumber}} Reviews</span>
+                    <input data-pid="{{rest.id}}" id="rest-rate" value="{{userVote}}" type="number"  min=.5 max=5 step=0.5  class="rating" data-show-clear="false" data-show-caption="true" data-size="sm">
+                    <span>{{reviewsNumber}} Reviews</span>
+                    <p style="color:red;"> you rate is <span id="uservote">{{userVote}}</span></p>
                 </div>
                 
                 <div class="col-md-6">
@@ -121,7 +123,8 @@
                         
                     </div>
                     <div class="col-md-8">
-                       <p><input id="review-rate" data-pid="5" class="rating form-control hide rating-input pull-left" data-show-clear="false" data-show-caption="false" data-size="lg"> <span> 24/06/2016</span></p>
+                        <!--<p><input id="review-rate" data-pid="{{rest.id}}" class="rating form-control hide rating-input pull-left" data-show-clear="false" data-show-caption="false" data-size="lg"> <span> 24/06/2016</span></p>-->
+                        <p><img src="../img/4stars.png"> <span> 24/06/2016</span></p>
                         <p>I've been to this place more than I can count. Everytime is like the first time. always having fun wheather I'm with friends or family.</p> <p> As in its information, the place is family, friends and even couple place. </p>
                         <p>Food is always great and delicious. My favorite is pizza, if you haven't try it yet, Trust me.. you should. What kind? ANY KIND is good there.</p>
                         <br>
@@ -262,6 +265,9 @@
                     if(data==="login")
                     {
                         $('#myModal').modal('show');
+                    }else if(data.msg==="success"){
+                        // window.location.replace("http://localhost:3000/resturant/"+pid);
+                        $("#uservote").text(data.rate);
                     }
                  }
             });
