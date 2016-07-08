@@ -101,9 +101,16 @@ function requireLogin(req, res, next) {
     }
 };
 
-router.get('/rate', requireLogin, function (req, res) {
-    res.render('register/signin');
-});
+//router.get('/rate', requireLogin, function (req, res) {
+//    res.render('register/signin');
+//});
 
+
+
+router.get('/rate*', function (req, res) {
+    var rate = req.query.rate;
+    var rest_id = req.query.rest_id;
+    var user_id = req.session.user._id;
+});
 
 module.exports = router;

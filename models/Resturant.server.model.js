@@ -26,7 +26,7 @@ var userFeatures = new schema({
 
 var userRatings = new schema({
     rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' },
-    resturantVote:Number
+    resturantVote: Number
 
 });
 
@@ -38,22 +38,42 @@ var usersSchema = new schema({
     },
     adress: String,
     theEmail: String,
-    password: { type: String,bcrypt:true},
+    password: { type: String, bcrypt: true },
     picture: String,
     birthDate: { type: Date },
     gender: String,
     mobile: String,
     role: String,
     favourites: [{ type: schema.Types.ObjectId, ref: 'Resturant' }],
-    wishlist:[{ type: schema.Types.ObjectId, ref: 'Resturant' }],
+    wishlist: [{ type: schema.Types.ObjectId, ref: 'Resturant' }],
     userRatings: [userRatings],
     features: userFeatures,
     resturants: [{ type: schema.Types.ObjectId, ref: 'Resturant' }],
     //the recommendation for the user(user-based)
     recommended_resturants: [{
-        rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' },
-        rankValue: Number
-    }]
+            rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' },
+            rankValue: Number
+        }]
+}, {
+  toObject: {
+  virtuals: true
+  },
+  toJSON: {
+  virtuals: true 
+  }
+});
+
+// make a virtual property to get and set the user full name
+usersSchema.virtual('name.full')
+.get(function () {
+  return this.name.first + ' ' + this.name.last;
+}).set(function (setFullNameTo) {
+  var split = setFullNameTo.split(' ')
+    , firstName = split[0]
+    , lastName = split[1];
+
+  this.set('name.first', firstName);
+  this.set('name.last', lastName);
 });
 
 //create the user model from usersSchema
@@ -69,10 +89,10 @@ var productSchema = new schema({
     name: String,
     description: String,
     photo: String,
-    details: {
-        price: Number,
-        size: String
-    },
+    details: [{
+        size: String,   
+        price: Number
+    }]  ,
     rates: [productRateSchema]
 });
 
@@ -86,7 +106,7 @@ var resturantRateSchema = new schema({
     user_id: { type: schema.Types.ObjectId, ref: 'User' },
     //user_id: { type: String, ref: 'User' },
     resturantVote: Number,
-    _id:false
+    _id: false
 });
 
 var resturantReviewSchema = new schema({
@@ -132,17 +152,14 @@ var resturantFeatures = new schema({
     alchols: Boolean,
     lightiningRomantic: Boolean,
     publicToilets: Boolean,
-    _id:false
-
-
-
+    _id: false
 });
 
 
 // create the resturantschema
 var resturantSchema = new schema({
     addedBy: { type: schema.Types.ObjectId, ref: 'User' },
-    approved:{ type: Boolean, default: false },
+    approved: { type: Boolean, default: false },
     name: String,
     description: String,
     photo: String,
@@ -154,20 +171,20 @@ var resturantSchema = new schema({
     },
     branches: [String],
     features: resturantFeatures,
-    categories: [CategorySchema],
+     categories: [CategorySchema],
     rates: [resturantRateSchema],
     reviews: [resturantReviewSchema],
-
+    
     //the recommendation for resturants(item-based)
     similarResturants: [{
-        rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' },
-        rankValue: Number
-    }]
+            rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' },
+            rankValue: Number
+        }]
 });
 
 // create unique index while rating
 resturantRateSchema.index({ user_id: 1, rest_id: 1 }, { unique: true });
-resturantSchema.index({ rates: 1}, { unique: true });
+//resturantSchema.index({ rates: 1 }, { unique: true });
 
 
 // build the Resturant model from the resturantSchema
@@ -197,7 +214,7 @@ module.exports = {
             return callback(null, isPasswordMatch);
         });
     },
-    createResturant: function (newResturant,callback) {
+    createResturant: function (newResturant, callback) {
         newResturant.save(callback);
     }
 }

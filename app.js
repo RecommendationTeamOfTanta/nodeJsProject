@@ -9,20 +9,22 @@ var multipart = require('connect-multiparty');
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
 
-
 //sessions through mongoDB
 //var mongoStore = require('connect-mongo')(express);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
+var rest =require('./routes/resturants.js');
 var signup = require('./routes/signup.js');
 var admin_rest = require('./routes/rest_admin.js');
+var admin_master= require('./routes/admin_master.js');
+
+
 
 var recommendation = require('./routes/recommendations.js');
 var mongoose = require('mongoose');
 //mongoose.connect('mongodb://itarget:itarget@ds025792.mlab.com:25792/itarget');
-mongoose.connect('mongodb://localhost:27017/itarget');
+mongoose.connect('mongodb://127.0.0.1:27017/itarget');
 var app = express();
 
 
@@ -91,6 +93,8 @@ app.use('/users', users);
 app.use('/', signup);
 app.use('/', recommendation);
 app.use('/', admin_rest);
+app.use ('/',rest);
+app.use ('/masterr',admin_master);
 
 
 // session and cookies details
@@ -102,6 +106,9 @@ app.use('/', admin_rest);
 //to modify http response header (X-Powered-By of the request header)
 app.use(function (req, res, next) {
     res.set('X-Powered-By', 'Itarget-team-2016')
+    //prevent caching
+    res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+
     next();
 });
 

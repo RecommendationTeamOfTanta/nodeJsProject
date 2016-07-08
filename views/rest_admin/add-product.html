@@ -1,0 +1,126 @@
+﻿{% extends '../layout_master.html' %}
+
+{% block head %}
+<!-- select style -->
+<link href="../css/select-style.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" type="text/css" media="all" href="../css/style.css">
+<script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.leanModal.min.js"></script>
+
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+
+{% endblock %}
+{% block title %}iTarget - Add resturant{% endblock %}
+
+<br>
+{% block body content %}
+
+<div class="container bg-col">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>add product to your category</h1>
+            <form class="form-border" method="post" action="/add-prod/{{cat_id}}" enctype="multipart/form-data">
+
+                <div class="form-group margin-Top">
+                    <label for="prod-name">Product Name:</label>
+                    <input type="text" class="form-control" name="prodName" id="prod-name" placeholder="product Name">
+                </div>
+
+                <div class="form-group">
+                    <label for="input-details">details:</label>
+                    <input type="text" class="form-control" id="input-details" name="details" placeholder="eg: size1:price1,size2:price2...">
+                </div>
+
+                 <div class="form-group">
+                    <label for="description">description:</label>
+                    <textarea class="form-control" rows="5" id="description" name="description" placeholder="enter the product description"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputlogo">product photo</label>
+                    <input type="file" id="inputlogo" name="thumbnail">
+                    <p class="help-block">upload your product photo.</p>
+                </div>
+
+                <br />
+                <input type="submit" style="margin: 10px auto;" class="btn btn-danger btn-lg btn-block" id="add-cat" href="" value="add">
+
+            </form>
+        </div>
+
+
+
+    </div>
+
+
+    <div class="row" style="padding-top:15px;">
+
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th style="color: #7b171f;">Name</th>
+                    <th style="color: #7b171f;">description</th>
+                    <th style="color: #7b171f;">(size:price)</th>
+                    <th style="color: #7b171f;">manage</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for prod,v in prods %}
+                
+                <tr>
+                    <td>{{v.name}}</td>
+                    <td>{{v.description}}</td>
+                    <td>
+                    {% for k,f in v.details %}
+                    ({{f.size}}:{{f.price}}) , 
+                    {%endfor%}
+                    </td>
+
+                    <td>
+                        <a class="btn btn-danger confirmation" href="/remove-prod/{{cat_id}}/{{v.id}}">Delete</a> |
+                        <a class="btn btn-success" href="/add-cat">back to categories</a>
+                    </td>
+                </tr>
+               
+                {%endfor%}
+
+
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<script type="text/javascript">
+    var elems = document.getElementsByClassName('confirmation');
+    var confirmIt = function (e) {
+        if (!confirm('Are you sure?')) e.preventDefault();
+    };
+    for (var i = 0, l = elems.length; i < l; i++) {
+        elems[i].addEventListener('click', confirmIt, false);
+    }
+</script>
+<script>
+    $('#add-cat').on('click', function () {
+        var rest_id = $('#restList').val();
+        var cat_name = $('#inputname').val();
+        var cat_type = $('#input-type').val();
+        $.ajax({
+            url: 'http://localhost:3000/add-cat',
+            type: 'POST',
+            data: { rest_id: rest_id, cat_name: cat_name, cat_type: cat_type }
+        });
+    });
+
+</script>
+
+
+{% endblock %}
