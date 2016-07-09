@@ -1,6 +1,4 @@
-{% extends 'layout_master.html' %}
-
-{% block head %}
+{% extends 'layout_master.html' %} {% block head %}
 <link rel="stylesheet" href="../css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/star-rating.css">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,51 +10,48 @@
 <script type="text/javascript" charset="utf-8" src="../js/jquery.leanModal.min.js"></script>
 
 <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script> {% endblock %} {% block title %}iTarget -{{rest.name}}{%
+endblock %}
 
+<br> {% block body content %}
+<!-- Navbar here -->
 
-
-{% endblock %}
-{% block title %}iTarget -{{rest.name}}{% endblock %}
-
-<br>
-{% block body content %}
-  <!-- Navbar here -->
-        
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h1 style="color: #7b171f;">{{rest.name}}</h1>
-                    <input data-pid="{{rest.id}}" id="rest-rate" value="{{userVote}}" type="number"  min=.5 max=5 step=0.5  class="rating" data-show-clear="false" data-show-caption="true" data-size="sm">
-                    <span>{{reviewsNumber}} Reviews</span>
-                    <p style="color:red;"> you rate is <span id="uservote">{{userVote}}</span></p>
-                </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 style="color: #7b171f;">{{rest.name}}</h1>
+            <input data-pid="{{rest.id}}" id="rest-rate" value="{{avgRate}}" min=.5 max=5 step=.5 class="rating" data-show-clear="false"
+                data-show-caption="false" data-size="lg">
                 
-                <div class="col-md-6">
-                    <a style="margin: 40px 50px 0 0;" class="btn btn-lg btn-primary img-clean" href="../writeReview.html"><span class="glyphicon glyphicon-star-empty"></span> Write a Review</a>
-                    
-                    <a style="margin: 50px 0 0 0;" class="btn btn-default" href="writeReview.html"><span class="glyphicon glyphicon-share"></span> Share</a>
-                    
-                    <a style="margin: 50px 0 0 0;" class="btn btn-default" href="#"><span class="glyphicon glyphicon-bookmark"></span> Add to Favorite</a>
-                    
-                </div>
-            </div>
-            
-            <hr>
+            <span>{{reviewsNumber}} Reviews</span>
+            <p style="color:red;"> you rate is <span id="uservote">{{userVote}}</span></p>
         </div>
-        
-        <div class="container">
-           <div class="row">
-              <div class="col-sm-6 col-md-3" style="border: 1px solid #e2e2e2">
-                    <div class="">
-                      <div class="center" style="margin: 10px 0; padding: 0px; max-width: 300px; max-height: 300px"><img class="img-thumbnail img-responsive" src="../img/map.png" alt="..."></div>
-                      <div class="caption">
-                        <p style="padding: 0; font-size: 17px;">
-                            <span class="glyphicon glyphicon-map-marker"></span> {{rest.location}}. <br>
-                            <span class="glyphicon glyphicon-phone"></span> {{rest.mobile}}
-                        </p>
-                        <p>
-                            <a style="margin-bottom: 5px;" class="" href="#"><span class="glyphicon glyphicon-paperclip"></span> Send Private Message
+
+        <div class="col-md-6">
+            <a style="margin: 40px 50px 0 0;" class="btn btn-lg btn-primary img-clean" href="../writeReview.html"><span class="glyphicon glyphicon-star-empty"></span> Write a Review</a>
+
+            <a style="margin: 50px 0 0 0;" class="btn btn-default" href="writeReview.html"><span class="glyphicon glyphicon-share"></span> Share</a>
+
+            <a style="margin: 50px 0 0 0;" class="btn btn-default" href="#"><span class="glyphicon glyphicon-bookmark"></span> Add to Favorite</a>
+
+        </div>
+    </div>
+
+    <hr>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-3" style="border: 1px solid #e2e2e2">
+            <div class="">
+                <div class="center" style="margin: 10px 0; padding: 0px; max-width: 300px; max-height: 300px"><img class="img-thumbnail img-responsive" src="../img/map.png" alt="..."></div>
+                <div class="caption">
+                    <p style="padding: 0; font-size: 17px;">
+                        <span class="glyphicon glyphicon-map-marker"></span> {{rest.location}}. <br>
+                        <span class="glyphicon glyphicon-phone"></span> {{rest.mobile}}
+                    </p>
+                    <p>
+                        <a style="margin-bottom: 5px;" class="" href="#"><span class="glyphicon glyphicon-paperclip"></span> Send Private Message
                         </p>
                       </div>
                     </div>
@@ -89,44 +84,48 @@
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <li><a href="#">Newest First</a></li>
-                    <li><a href="#">Oldest First</a></li>
-                    <li><a href="#">Highest Rated</a></li>
-                    <li><a href="#">Lowerst Rated</a></li>
-                  </ul>
+                        <li><a href="#">Oldest First</a></li>
+                        <li><a href="#">Highest Rated</a></li>
+                        <li><a href="#">Lowerst Rated</a></li>
+                        </ul>
                 </div>
-                
+
                 <hr>
-                
+
                 <div class="alert alert-warning" role="alert">
-                    <b>Your trust is our top priority. </b><p>So, we made sure that business owners can't pay to alter or remove your review.</p>
+                    <b>Your trust is our top priority. </b>
+                    <p>So, we made sure that business owners can't pay to alter or remove your review.</p>
                 </div>
-                
+
                 <div class="well">
                     <div style="font-size: 40px;" class="rating center">
-                       <p>Your Rating</p>
+                        <p>Your Rating</p>
                         <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><br>
                     </div>
                     <hr>
                     <div style="font-size: 25px;" class="center">
                         <a href="writeReview.html">Start writing a review..</a>
-                    </div> 
+                    </div>
                 </div>
-                
+
                 <hr>
-                
+
                 <div class="row">
                     <div class="col-md-4">
                         <div class="img-responsive"><img src="../img/user.jpg"></div><br>
                         <p><b>Hassan Ashraf</b></p>
                         <p><span style="color: #7b171f" class="glyphicon glyphicon-user"></span> 114 Friends</p>
                         <p><span style="color: #7b171f" class="glyphicon glyphicon-star"></span> 524 Review</p>
-                        
+
                     </div>
                     <div class="col-md-8">
                         <!--<p><input id="review-rate" data-pid="{{rest.id}}" class="rating form-control hide rating-input pull-left" data-show-clear="false" data-show-caption="false" data-size="lg"> <span> 24/06/2016</span></p>-->
                         <p><img src="../img/4stars.png"> <span> 24/06/2016</span></p>
-                        <p>I've been to this place more than I can count. Everytime is like the first time. always having fun wheather I'm with friends or family.</p> <p> As in its information, the place is family, friends and even couple place. </p>
-                        <p>Food is always great and delicious. My favorite is pizza, if you haven't try it yet, Trust me.. you should. What kind? ANY KIND is good there.</p>
+                        <p>I've been to this place more than I can count. Everytime is like the first time. always having fun
+                            wheather I'm with friends or family.</p>
+                        <p> As in its information, the place is family, friends and even couple place. </p>
+                        <p>Food is always great and delicious. My favorite is pizza, if you haven't try it yet, Trust me.. you
+                            should. What kind? ANY KIND is good there.</p>
                         <br>
                         <div class="row">
                             <p><b>Was this review …?</b></p>
@@ -136,21 +135,24 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <hr>
-                
+
                 <div class="row">
                     <div class="col-md-4">
                         <div class="img-responsive"><img src="img/user.jpg"></div><br>
                         <p><b>Hassan Ashraf</b></p>
                         <p><span style="color: #7b171f" class="glyphicon glyphicon-user"></span> 114 Friends</p>
                         <p><span style="color: #7b171f" class="glyphicon glyphicon-star"></span> 524 Review</p>
-                        
+
                     </div>
                     <div class="col-md-8">
                         <p><img src="../img/4stars.png"> <span> 24/06/2016</span></p>
-                        <p>I've been to this place more than I can count. Everytime is like the first time. always having fun wheather I'm with friends or family.</p> <p> As in its information, the place is family, friends and even couple place. </p>
-                        <p>Food is always great and delicious. My favorite is pizza, if you haven't try it yet, Trust me.. you should. What kind? ANY KIND is good there.</p>
+                        <p>I've been to this place more than I can count. Everytime is like the first time. always having fun
+                            wheather I'm with friends or family.</p>
+                        <p> As in its information, the place is family, friends and even couple place. </p>
+                        <p>Food is always great and delicious. My favorite is pizza, if you haven't try it yet, Trust me.. you
+                            should. What kind? ANY KIND is good there.</p>
                         <br>
                         <div class="row">
                             <p><b>Was this review …?</b></p>
@@ -160,21 +162,24 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <hr>
-                
+
                 <div class="row">
                     <div class="col-md-4">
                         <div class="img-responsive"><img src="../img/user.jpg"></div><br>
                         <p><b>Hassan Ashraf</b></p>
                         <p><span style="color: #7b171f" class="glyphicon glyphicon-user"></span> 114 Friends</p>
                         <p><span style="color: #7b171f" class="glyphicon glyphicon-star"></span> 524 Review</p>
-                        
+
                     </div>
                     <div class="col-md-8">
-                       <p><img src="../img/4stars.png"> <span> 24/06/2016</span></p>
-                        <p>I've been to this place more than I can count. Everytime is like the first time. always having fun wheather I'm with friends or family.</p> <p> As in its information, the place is family, friends and even couple place. </p>
-                        <p>Food is always great and delicious. My favorite is pizza, if you haven't try it yet, Trust me.. you should. What kind? ANY KIND is good there.</p>
+                        <p><img src="../img/4stars.png"> <span> 24/06/2016</span></p>
+                        <p>I've been to this place more than I can count. Everytime is like the first time. always having fun
+                            wheather I'm with friends or family.</p>
+                        <p> As in its information, the place is family, friends and even couple place. </p>
+                        <p>Food is always great and delicious. My favorite is pizza, if you haven't try it yet, Trust me.. you
+                            should. What kind? ANY KIND is good there.</p>
                         <br>
                         <div class="row">
                             <p><b>Was this review …?</b></p>
@@ -184,75 +189,78 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
-            
-            
-            
-            
-            
-        <div class="col-md-4 margin30">
+
+
+
+
+
+            <div class="col-md-4 margin30">
                 <!-- Blog Search Well -->
-             <div class="panel panel-inverse img-clean">
-                  <div style="color: white;" class="panel-body">
-                    <h4>Similar Places</h4>
-                  </div>
-                  <div class="panel-footer">Recommendation Data</div>
-            </div>   
-                
+                <div class="panel panel-inverse img-clean">
+                    <div style="color: white;" class="panel-body">
+                        <h4>Similar Places</h4>
+                    </div>
+                    <div class="panel-footer">Recommendation Data</div>
+                </div>
 
-           
-           <hr>
-            <!-- Blog Categories Well -->
-            <div class="panel panel-inverse img-clean">
-                  <div style="color: white;" class="panel-body">
-                    <h4>Recommended for You</h4>
-                  </div>
-                  <div class="panel-footer">Recommendation Data</div>
-            </div>
-            
-            
-             <div class="panel panel-inverse img-clean">
-                  <div style="color: white;" class="panel-body">
-                    <h4>Hours</h4>
-                  </div>
-                  <div class="panel-footer">
-                      <p style="font-size: 19px;">27 Hours per 7 Days a Week</p>
-                  </div>
-            </div>
-            
-            
-            <div class="panel panel-inverse img-clean">
-                  <div style="color: white;" class="panel-body">
-                    <h4>Business Info</h4>
-                  </div>
-                  <div class="panel-footer">
-                    <p><b>Take-away: </b>Yes</p>
-                    <p><b>Wifi: </b>Perfect</p>
-                    <p><b>Accept Cridet Card: </b>Yes</p>
-                    <p><b>Car Parking: </b>Street</p>
-                    <p><b>Outside Seats: </b>Yes</p>
-                  </div>
-            </div>
 
-      
-            <hr>
-            <!-- Side Widget Well -->
-            <div class="panel panel-inverse img-clean">
-                  <div style="color: white;" class="panel-body">
-                    <h4>Qoute of the Day</h4>
-                  </div>
-                  <div class="panel-footer">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</div>
-            </div>
-            
-            
+
+                <hr>
+                <!-- Blog Categories Well -->
+                <div class="panel panel-inverse img-clean">
+                    <div style="color: white;" class="panel-body">
+                        <h4>Recommended for You</h4>
+                    </div>
+                    <div class="panel-footer">Recommendation Data</div>
+                </div>
+
+
+                <div class="panel panel-inverse img-clean">
+                    <div style="color: white;" class="panel-body">
+                        <h4>Hours</h4>
+                    </div>
+                    <div class="panel-footer">
+                        <p style="font-size: 19px;">27 Hours per 7 Days a Week</p>
+                    </div>
+                </div>
+
+
+                <div class="panel panel-inverse img-clean">
+                    <div style="color: white;" class="panel-body">
+                        <h4>Business Info</h4>
+                    </div>
+                    <div class="panel-footer">
+                        <p><b>Take-away: </b>Yes</p>
+                        <p><b>Wifi: </b>Perfect</p>
+                        <p><b>Accept Cridet Card: </b>Yes</p>
+                        <p><b>Car Parking: </b>Street</p>
+                        <p><b>Outside Seats: </b>Yes</p>
+                    </div>
+                </div>
+
+
+                <hr>
+                <!-- Side Widget Well -->
+                <div class="panel panel-inverse img-clean">
+                    <div style="color: white;" class="panel-body">
+                        <h4>Qoute of the Day</h4>
+                    </div>
+                    <div class="panel-footer">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus
+                        laudantium odit aliquam repellat tempore quos aspernatur vero.</div>
+                </div>
+
+
             </div>
         </div>
-        
-        
-        
-    <script>
+
+
+
+        <script>
         $('.rating').on('rating.change', function (event, value, caption) {
+            // $('.rating').rating('refresh', {disabled: true, showClear: false, showCaption: true});
+
             $(document).off(".firstCall");
             var anchor = $(event.currentTarget),
             pid = anchor.closest(".rating").data("pid");
@@ -266,19 +274,17 @@
                     {
                         $('#myModal').modal('show');
                     }else if(data.msg==="success"){
+                       $(".rating").readonly('true');
                         // window.location.replace("http://localhost:3000/resturant/"+pid);
                         $("#uservote").text(data.rate);
                     }
                  }
             });
         });
-    </script>  
-               
-               
-        
+    </script>
+
+
+
         <script>
             $('.dropdown-toggle').dropdown()
-        </script>
-
-
-{% endblock %}
+        </script> {% endblock %}

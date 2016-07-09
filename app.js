@@ -14,10 +14,10 @@ var flash = require('connect-flash');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var rest =require('./routes/resturants.js');
+var rest = require('./routes/resturants.js');
 var signup = require('./routes/signup.js');
 var admin_rest = require('./routes/rest_admin.js');
-var admin_master= require('./routes/admin_master.js');
+var admin_master = require('./routes/admin_master.js');
 
 
 
@@ -88,13 +88,13 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+app.use('/home', routes);
 app.use('/users', users);
 app.use('/', signup);
 app.use('/', recommendation);
 app.use('/', admin_rest);
-app.use ('/',rest);
-app.use ('/masterr',admin_master);
+app.use('/', rest);
+app.use('/masterr', admin_master);
 
 
 // session and cookies details
