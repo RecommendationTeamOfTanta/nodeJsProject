@@ -22,7 +22,7 @@ endblock %}
             <h1 style="color: #7b171f;">{{rest.name}}</h1>
             <input data-pid="{{rest.id}}" id="rest-rate" value="{{avgRate}}" min=.5 max=5 step=.5 class="rating" data-show-clear="false"
                 data-show-caption="false" data-size="lg">
-                
+
             <span>{{reviewsNumber}} Reviews</span>
             <p style="color:red;"> you rate is <span id="uservote">{{userVote}}</span></p>
         </div>
@@ -71,7 +71,8 @@ endblock %}
         <hr>
         
         <div class="container">
-            <div class="col-md-8">
+            <div class="row">
+            <div class="col-md-12">
                 <h2 style="color: #7b171f">
                     Reviews
                 </h2>
@@ -97,167 +98,230 @@ endblock %}
                     <p>So, we made sure that business owners can't pay to alter or remove your review.</p>
                 </div>
 
-                <div class="well">
-                    <div style="font-size: 40px;" class="rating center">
-                        <p>Your Rating</p>
-                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><br>
-                    </div>
-                    <hr>
-                    <div style="font-size: 25px;" class="center">
-                        <a href="writeReview.html">Start writing a review..</a>
-                    </div>
-                </div>
 
-                <hr>
 
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="img-responsive"><img src="../img/user.jpg"></div><br>
-                        <p><b>Hassan Ashraf</b></p>
-                        <p><span style="color: #7b171f" class="glyphicon glyphicon-user"></span> 114 Friends</p>
-                        <p><span style="color: #7b171f" class="glyphicon glyphicon-star"></span> 524 Review</p>
-
-                    </div>
-                    <div class="col-md-8">
-                        <!--<p><input id="review-rate" data-pid="{{rest.id}}" class="rating form-control hide rating-input pull-left" data-show-clear="false" data-show-caption="false" data-size="lg"> <span> 24/06/2016</span></p>-->
-                        <p><img src="../img/4stars.png"> <span> 24/06/2016</span></p>
-                        <p>I've been to this place more than I can count. Everytime is like the first time. always having fun
-                            wheather I'm with friends or family.</p>
-                        <p> As in its information, the place is family, friends and even couple place. </p>
-                        <p>Food is always great and delicious. My favorite is pizza, if you haven't try it yet, Trust me.. you
-                            should. What kind? ANY KIND is good there.</p>
-                        <br>
-                        <div class="row">
-                            <p><b>Was this review …?</b></p>
-                            <a class="btn btn-default" href=""><span class="glyphicon glyphicon-plus"></span> Useful <span style="color: #7b171f"> 6</span></a>
-                            <a class="btn btn-default" href=""><span class="glyphicon glyphicon-adjust"></span> Meh <span style="color: #7b171f"> 4</span></a>
-                            <a class="btn btn-default" href=""><span class="glyphicon glyphicon-minus"></span> Spam <span style="color: #7b171f"> </span></a>
-                        </div>
-                    </div>
-                </div>
-
-                <hr>
-
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="img-responsive"><img src="img/user.jpg"></div><br>
-                        <p><b>Hassan Ashraf</b></p>
-                        <p><span style="color: #7b171f" class="glyphicon glyphicon-user"></span> 114 Friends</p>
-                        <p><span style="color: #7b171f" class="glyphicon glyphicon-star"></span> 524 Review</p>
-
-                    </div>
-                    <div class="col-md-8">
-                        <p><img src="../img/4stars.png"> <span> 24/06/2016</span></p>
-                        <p>I've been to this place more than I can count. Everytime is like the first time. always having fun
-                            wheather I'm with friends or family.</p>
-                        <p> As in its information, the place is family, friends and even couple place. </p>
-                        <p>Food is always great and delicious. My favorite is pizza, if you haven't try it yet, Trust me.. you
-                            should. What kind? ANY KIND is good there.</p>
-                        <br>
-                        <div class="row">
-                            <p><b>Was this review …?</b></p>
-                            <a class="btn btn-default" href=""><span class="glyphicon glyphicon-plus"></span> Useful <span style="color: #7b171f"> 6</span></a>
-                            <a class="btn btn-default" href=""><span class="glyphicon glyphicon-adjust"></span> Meh <span style="color: #7b171f"> 4</span></a>
-                            <a class="btn btn-default" href=""><span class="glyphicon glyphicon-minus"></span> Spam <span style="color: #7b171f"> </span></a>
-                        </div>
-                    </div>
-                </div>
-
-                <hr>
-
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="img-responsive"><img src="../img/user.jpg"></div><br>
-                        <p><b>Hassan Ashraf</b></p>
-                        <p><span style="color: #7b171f" class="glyphicon glyphicon-user"></span> 114 Friends</p>
-                        <p><span style="color: #7b171f" class="glyphicon glyphicon-star"></span> 524 Review</p>
-
-                    </div>
-                    <div class="col-md-8">
-                        <p><img src="../img/4stars.png"> <span> 24/06/2016</span></p>
-                        <p>I've been to this place more than I can count. Everytime is like the first time. always having fun
-                            wheather I'm with friends or family.</p>
-                        <p> As in its information, the place is family, friends and even couple place. </p>
-                        <p>Food is always great and delicious. My favorite is pizza, if you haven't try it yet, Trust me.. you
-                            should. What kind? ANY KIND is good there.</p>
-                        <br>
-                        <div class="row">
-                            <p><b>Was this review …?</b></p>
-                            <a class="btn btn-default" href=""><span class="glyphicon glyphicon-plus"></span> Useful <span style="color: #7b171f"> 6</span></a>
-                            <a class="btn btn-default" href=""><span class="glyphicon glyphicon-adjust"></span> Meh <span style="color: #7b171f"> 4</span></a>
-                            <a class="btn btn-default" href=""><span class="glyphicon glyphicon-minus"></span> Spam <span style="color: #7b171f"> </span></a>
-                        </div>
-                    </div>
-                </div>
 
             </div>
 
+            <div class="row">
+                <ul class="nav nav-pills nav-justified text-nowrap">
+                    <li><a data-toggle="pill" href="#textMenue" class="tabb"><span class="glyphicon glyphicon-align-center"></span> Text Menu</a></li>
+                    <li><a data-toggle="pill" href="#capturedMenue" class="tabb"><span class="glyphicon glyphicon-eye-open"></span> Captured Menu</a></li>
+                    <li><a data-toggle="pill" href="#reviews" id="reviewtab" class="tabb"><span class="glyphicon glyphicon-pencil"></span> Reviews</a></li>
+                    <li><a data-toggle="pill" href="#photos" class="tabb"><span class="glyphicon glyphicon-camera"></span> Photos</a></li>
+                    <li><a data-toggle="pill" href="#branches" class="tabb"><span class="glyphicon glyphicon-map-marker"></span> Branches</a></li>
+                </ul>
+                <hr />
+                <div class="tabb-content">
+                    <div class="tab-content">
+
+                        <div id="textMenue" class="tab-pane fade">
+                            <div class="container" style="padding-left:0;padding-right:0;">
+                                <div class="panel-group" id="accordion">
+
+                                    @foreach (var item in Model) {
+                                    <div class="panel panel-default cordion-panel" data-catpanel="@item.CategoryId">
+                                        <div class="panel-heading text-center cordion-heading" style="font-size:x-large">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#@item.CategoryId" id="predict" style="display: block;">
+                                                        @item.CategoryName<span class="caret"></span>
+                                                    </a>
+                                        </div>
+                                        <div id="@item.CategoryId" class="panel-collapse collapse">
+                                            <div class="panel-body textbody">
+                                                <div class="col-xs-18 col-sm-6 col-md-2 product">
+                                                    <div class="thumbnail">
+                                                        <img src="~/@product.ProductPhoto??width=300&height=300" alt=" ">
+                                                        <div class="caption prod-caption">
+                                                            <h4 class="text-center">@product.ProductName</h4>
+                                                            <p class="text-center">@product.ProductDesc</p>
+                                                            @if (product.tbl_Products_price.Count() != 0) {
+                                                            <p class="text-center">large: @priceLarge</p>
+                                                            <p class="text-center">combo: @priceCombo</p>
+
+                                                            }
+
+
+                                                            <p>
+                                                                <h6 class="text-center">
+                                                                    <span class="col-sm-5 col-xs-12 col-md-7 ">
+                                                                                        <input data-pid="@product.ProductId" value="@ProductvoteAvg" class="rating form-control hide rating-input" data-show-clear="false" data-show-caption="false" data-size="md">
+                                                                                    </span>
+                                                                    <b class="col-sm-7 col-xs-12 col-md-3 prod-votes">(@countProductVotes)</b>
+                                                                </h6>
+
+                                                                @*<span class="result">ddddd</span>*@ @*
+                                                                <small data-result="@product.ProductId" class="lblResult">.</small>*@
+                                                            </p>
+
+                                                            <p data-result="@product.ProductId" class="col-sm-5 col-xs-12 col-md-7 text-nowrap lblResult">.</p>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                } }
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default xtraa-panel-default" style="margin-top: 0;" data-catpanell="@item.CategoryId">
+
+                                        <div class="panel-body fixed-panel eaxtraa-panel">
+
+
+                                            <div class="col-xs-18 col-sm-6 col-md-2">
+                                                <div class="thumbnail extra-panel">
+                                                    <img src="~/@topPro.ProductPhoto" alt="@topPro.ProductName">
+                                                    <div class="caption">
+                                                        <h6 class="text-center">@topPro.ProductName</h6>
+                                                        <p class="text-center">@topPro.ProductDesc</p>
+                                                        <p class="text-center">price:500LE</p>
+
+                                                    </div>
+                                                    <div class="caption-btm text-center">
+                                                        <h6>@topPro.ProductName</h6>
+                                                        <input value="@theVote" readonly="readonly" class="rating form-control hide text-center" data-show-clear="false" data-show-caption="false"
+                                                            data-size="md">
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            } @if (prodsCount != 0) {
+                                            <h6 class="text-center col-md-offset-11"><a data-toggle="collapse" data-parent="#accordion" href="#@item.CategoryId" class="btn btn-md btn-default seeMore"><span>more..</span></a></h6>
+                                            }
+
+
+                                        </div>
+                                    </div>
+
+                                    }
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div id="capturedMenue" class="tab-pane fade">
+                            <div class="container" style="background-color:#d3cfcf">
+                                <div class="panel panel-default col-sm-12 ">
+
+                                    <div id="DataCapturedMenues" class="panel-body fixed-panel">
 
 
 
 
-            <div class="col-md-4 margin30">
-                <!-- Blog Search Well -->
-                <div class="panel panel-inverse img-clean">
-                    <div style="color: white;" class="panel-body">
-                        <h4>Similar Places</h4>
+                                        @foreach (var menue in (IEnumerable
+                                        <BOL.CapturedMenue>)ViewData["capturedMenues"]) {
+
+
+                                            <div class="col-xs-18 col-sm-6 col-md-4">
+                                                <div class="thumbnail">
+                                                    <a href="#modal-photos-Captured">
+                                                        <img class="cap-menue" src="~/@menue.CapturePhoto?width=500&height=500" alt="food photo">
+                                                    </a>
+
+                                                </div>
+                                            </div>
+
+                                            }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="reviews" class="tab-pane fade">
+                            <div class="container" style="background-color:#d3cfcf">
+                                <div class="panel panel-default col-sm-12 ">
+                                    <div class="panel-heading">
+                                        <h2 class="panel-title text-nowrap">Rate this</h2>
+                                        <input id="review-rate" class="rating form-control hide rating-input pull-left" data-show-clear="false" data-show-caption="false"
+                                            data-size="md">
+
+                                        <div id="rate-validation" style="display:none;">
+                                        </div>
+                                    </div>
+                                    <div class="panel-body fixed-panel reviews-pannel">
+
+                                        <div class="row">
+                                            <div class="col-sm-10 col-xs-12 col-sm-push-1 well">
+
+                                                <textarea type="text" class="required form-control" id="reviewTxtArea" placeholder="Type in your review" rows="5"></textarea>
+                                                <div id="text-area-validation" style="display:none;">
+                                                </div>
+                                                <br />
+                                                <input type="button" id="addReviewBtn" value="add review" class="btn btn-md btn-primary pull-right" />
+                                            </div>
+                                        </div>
+                                        <!-- row-text-area reviews-->
+                                        <div class="row">
+                                            <hr />
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-11 col-sm-push-1">
+                                                <div class="reviews">
+                                                    <div id="reviewSection">
+                                                        <ul class="media-list reviews-list">
+                                                            <li class="media">
+                                                                <a href="#">
+                                                                    <img src="@userpic" class="media-object img-rounded" />
+                                                                </a>
+                                                                <div class="media-body" id="review">
+                                                                    <h4 class="media-heading">
+                                                                        <a>@userName</a>
+                                                                        <p>@item.ReviewDate.Value.ToShortDateString()</p>
+
+                                                                        <input id="input-3" value="@vote" readonly="readonly" class="rating form-control hide" data-show-clear="false" data-show-caption="false"
+                                                                            data-size="xs">
+                                                                    </h4>
+                                                                    <a class="pull-right report-review" data-reviewreport="@item.ReviewId"><span class="glyphicon glyphicon-flag"></span></a>                                                                    } @if (User.IsInRole("A")) {
+                                                                    <a class="pull-right remove-review" data-reviewremove="@item.ReviewId"><span class="glyphicon glyphicon-remove"></span></a>                                                                    }
+
+                                                                    <blockquote>@item.ReviewDesc</blockquote>
+
+                                                                    <div class="col-sm-12">
+                                                                        <small style="display:none;" class="text-center reportrev-lbl" data-revreport="@item.ReviewId"></small>
+                                                                    </div>
+                                                                    <hr />
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div id="photos" class="tab-pane fade">
+                            <div class="container" style="background-color:#d3cfcf">
+                                <div class="panel panel-default col-sm-12 ">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <input type="button" id="addPhotoBtn" value="add Photo" class="btn btn-md btn-primary col-sm-12 col-xs-12" />
+                                            <a data-toggle="modal" href="#add-photos-to-resturant" class="btn btn-primary btn-lg" style="display:block;">Add photo</a>
+                                        </div>
+                                    </div>
+                                    <div id="DataPhotos" class="panel-body fixed-panel">
+
+                                        @Html.Partial("_PartialPhotosUploaded", ViewData["updatedPhotos"])
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="branches" class="tab-pane fade">
+                            <h3>Menu branches</h3>
+                            <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                        </div>
+
                     </div>
-                    <div class="panel-footer">Recommendation Data</div>
+
                 </div>
-
-
-
-                <hr>
-                <!-- Blog Categories Well -->
-                <div class="panel panel-inverse img-clean">
-                    <div style="color: white;" class="panel-body">
-                        <h4>Recommended for You</h4>
-                    </div>
-                    <div class="panel-footer">Recommendation Data</div>
-                </div>
-
-
-                <div class="panel panel-inverse img-clean">
-                    <div style="color: white;" class="panel-body">
-                        <h4>Hours</h4>
-                    </div>
-                    <div class="panel-footer">
-                        <p style="font-size: 19px;">27 Hours per 7 Days a Week</p>
-                    </div>
-                </div>
-
-
-                <div class="panel panel-inverse img-clean">
-                    <div style="color: white;" class="panel-body">
-                        <h4>Business Info</h4>
-                    </div>
-                    <div class="panel-footer">
-                        <p><b>Take-away: </b>Yes</p>
-                        <p><b>Wifi: </b>Perfect</p>
-                        <p><b>Accept Cridet Card: </b>Yes</p>
-                        <p><b>Car Parking: </b>Street</p>
-                        <p><b>Outside Seats: </b>Yes</p>
-                    </div>
-                </div>
-
-
-                <hr>
-                <!-- Side Widget Well -->
-                <div class="panel panel-inverse img-clean">
-                    <div style="color: white;" class="panel-body">
-                        <h4>Qoute of the Day</h4>
-                    </div>
-                    <div class="panel-footer">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus
-                        laudantium odit aliquam repellat tempore quos aspernatur vero.</div>
-                </div>
-
-
             </div>
         </div>
+    </div>
 
 
-
-        <script>
+    <script>
         $('.rating').on('rating.change', function (event, value, caption) {
             // $('.rating').rating('refresh', {disabled: true, showClear: false, showCaption: true});
 
@@ -285,6 +349,6 @@ endblock %}
 
 
 
-        <script>
+    <script>
             $('.dropdown-toggle').dropdown()
         </script> {% endblock %}

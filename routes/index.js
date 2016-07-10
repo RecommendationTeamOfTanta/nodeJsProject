@@ -7,11 +7,10 @@ var router = express.Router();
 
 
 /* GET home page. */
-router.get('/:page', function (req, res, next) {
+router.get('/:page?',   function (req, res, next) {
     Resturant.find({}, function (err, resturants) {
         if (resturants) {
             var pageCount = Math.ceil(resturants.length / 12);
-            console.log(resturants);
             var rest_rate = {};
 
             // calculate the average rate for evry resturant
@@ -30,12 +29,11 @@ router.get('/:page', function (req, res, next) {
                 // append new property avgRate to evry resturant in resturants array
                 resturants[index].avgRate = avg;
             }
-            console.log(rest_rate);
-            res.render('home', { resturants: resturants, pageCount: pageCount });
+            res.render('home', { resturants: resturants, pageCount: pageCount, layout: false });
         }
 
 
-    }).skip((Number(req.params.page) - 1) * 3).limit(12);
+    }).skip((Number(req.params.page) - 1) * 12).limit(12);
 });
 
 
