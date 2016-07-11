@@ -39,7 +39,7 @@ router.get('/resturant/:rest_id', function (req, res) {
                 res.render('rest', { rest: resturant, reviewsNumber: reviewsNumber, avgRate: avgRate });
             }
         }
-    });
+    }).populate('reviews.user_id');
 
 });
 
@@ -57,6 +57,22 @@ router.post('/rate*', function (req, res) {
     }
 });
 
+router.post('/review*', function (req, res) {
+    var user_id = req.session.user._id;;
+    var rest_id = req.body.rest_id;
+    var review_txt = req.body.review_text;
+    var review_rate = req.body.rest_rate;
+    if (review_txt && review_rate) {
+        addReview(user_id, rest_id, review_txt, review_rate, function () {
+            Resturant.findOne({ _id: rest_id }, function (err, resturant) {
+                if (resturant) {
+                    res.setHeader('Content-Type', 'application/json');
+                    res.send(JSON.stringify(resturant.reviews));
+                }
+            }).populate('reviews.user_id');
+        });
+    }
+});
 //add and update rate
 function AddRate(user_id, rest_id, rate) {
     //to check if user rate before
@@ -114,6 +130,48 @@ function AddRate(user_id, rest_id, rate) {
             );
         }
     });
+}
+
+function addReview(user_id, rest_id, review_txt, review_rate, callback) {
+    //to check if user rate before
+    Resturant.findOne({ _id: rest_id }, function (err, resturant) {
+        // if not rate insert it
+        if (resturant) {
+            Resturant.update({ '_id': rest_id },
+                { $push: { "reviews": { "user_id": user_id, "ReviewTxt": review_txt, "review_date": getDate("formated"), vote: review_rate } } },
+                function () {
+                    AddRate(user_id, rest_id, review_rate);
+                    callback();
+                }
+            );
+        }
+
+    });
+
+}
+
+
+function getDate(type) {
+    var today = new Date();
+    if (type == "numeric") {
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+        today = mm + '/' + dd + '/' + yyyy;
+        return today;
+
+    } else if (type == "formated") {
+        today = today.toString().split(' ').splice(1, 3).join(' ');
+        return today;
+    }
 }
 
 module.exports = router;

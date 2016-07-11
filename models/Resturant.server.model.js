@@ -53,30 +53,30 @@ var usersSchema = new schema({
     resturants: [{ type: schema.Types.ObjectId, ref: 'Resturant' }],
     //the recommendation for the user(user-based)
     recommended_resturants: [{
-            rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' },
-            rankValue: Number
-        }]
+        rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' },
+        rankValue: Number
+    }]
 }, {
-  toObject: {
-  virtuals: true
-  },
-  toJSON: {
-  virtuals: true 
-  }
-});
+        toObject: {
+            virtuals: true
+        },
+        toJSON: {
+            virtuals: true
+        }
+    });
 
 // make a virtual property to get and set the user full name
 usersSchema.virtual('name.full')
-.get(function () {
-  return this.name.first + ' ' + this.name.last;
-}).set(function (setFullNameTo) {
-  var split = setFullNameTo.split(' ')
-    , firstName = split[0]
-    , lastName = split[1];
+    .get(function () {
+        return this.name.first + ' ' + this.name.last;
+    }).set(function (setFullNameTo) {
+        var split = setFullNameTo.split(' ')
+            , firstName = split[0]
+            , lastName = split[1];
 
-  this.set('name.first', firstName);
-  this.set('name.last', lastName);
-});
+        this.set('name.first', firstName);
+        this.set('name.last', lastName);
+    });
 
 //create the user model from usersSchema
 var User = mongoose.model('User', usersSchema);
@@ -92,9 +92,9 @@ var productSchema = new schema({
     description: String,
     photo: String,
     details: [{
-        size: String,   
+        size: String,
         price: Number
-    }]  ,
+    }],
     rates: [productRateSchema]
 });
 
@@ -115,7 +115,8 @@ var resturantReviewSchema = new schema({
     user_id: { type: schema.Types.ObjectId, ref: 'User' },
     //rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' },
     ReviewTxt: String,
-    review_date: { type: Date, default: Date.now }
+    review_date: { type: Date, default: Date.now },
+    vote: Number
 });
 
 //var brancheSchema = new schema({
@@ -173,15 +174,15 @@ var resturantSchema = new schema({
     },
     branches: [String],
     features: resturantFeatures,
-     categories: [CategorySchema],
+    categories: [CategorySchema],
     rates: [resturantRateSchema],
     reviews: [resturantReviewSchema],
-    
+
     //the recommendation for resturants(item-based)
     similarResturants: [{
-            rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' },
-            rankValue: Number
-        }]
+        rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' },
+        rankValue: Number
+    }]
 });
 
 // create unique index while rating

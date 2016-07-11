@@ -53,7 +53,7 @@ function drawManageBrands(brands) {
         manageHtml += '<td><a class="btn btn-danger del-brand" data-bid="' + brands[i].id + '"  onclick="DeleteBrand();">Delete</a></td>';
     }
 
-    $('#content').html(manageHtml);
+    	
 }
 
 function drawManageCats(cats) {

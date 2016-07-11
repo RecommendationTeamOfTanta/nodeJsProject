@@ -180,7 +180,7 @@ endblock %}
                                                     <div class="caption-btm text-center">
                                                         <h6>@topPro.ProductName</h6>
                                                         <input value="@theVote" readonly="readonly" class="rating form-control hide text-center" data-show-clear="false" data-show-caption="false"
-                                                            data-size="md">
+                                                            data-size="lg">
                                                     </div>
                                                 </div>
 
@@ -236,6 +236,7 @@ endblock %}
                                             data-size="md">
 
                                         <div id="rate-validation" style="display:none;">
+                                            <sapn class="text-danger">please rate it from 5</span>
                                         </div>
                                     </div>
                                     <div class="panel-body fixed-panel reviews-pannel">
@@ -245,6 +246,7 @@ endblock %}
 
                                                 <textarea type="text" class="required form-control" id="reviewTxtArea" placeholder="Type in your review" rows="5"></textarea>
                                                 <div id="text-area-validation" style="display:none;">
+                                                    <span class="text-danger">Please type in a review.!</span>
                                                 </div>
                                                 <br />
                                                 <input type="button" id="addReviewBtn" value="add review" class="btn btn-md btn-primary pull-right" />
@@ -258,37 +260,43 @@ endblock %}
                                             <div class="col-sm-11 col-sm-push-1">
                                                 <div class="reviews">
                                                     <div id="reviewSection">
-                                                        <ul class="media-list reviews-list">
-                                                            <li class="media">
-                                                                <a href="#">
-                                                                    <img src="@userpic" class="media-object img-rounded" />
-                                                                </a>
-                                                                <div class="media-body" id="review">
-                                                                    <h4 class="media-heading">
-                                                                        <a>@userName</a>
-                                                                        <p>@item.ReviewDate.Value.ToShortDateString()</p>
+                                                        <div id="review-list">
+                                                            <ul>
+                                                                {%for review in rest.reviews%}
+                                                                <li class="media">
+                                                                    <a href="#">
+                                                                        <img src="@userpic" class="media-object img-rounded" />
+                                                                    </a>
+                                                                    <div class="media-body" id="review">
+                                                                        <h4 class="media-heading">
+                                                                            <a>{{review.user_id.name.full}}</a>
+                                                                            <p>{{review.review_date|date('d-m-Y , h:i A',-480)}}</p>
 
-                                                                        <input id="input-3" value="@vote" readonly="readonly" class="rating form-control hide" data-show-clear="false" data-show-caption="false"
-                                                                            data-size="xs">
-                                                                    </h4>
-                                                                    <a class="pull-right report-review" data-reviewreport="@item.ReviewId"><span class="glyphicon glyphicon-flag"></span></a>                                                                    } @if (User.IsInRole("A")) {
-                                                                    <a class="pull-right remove-review" data-reviewremove="@item.ReviewId"><span class="glyphicon glyphicon-remove"></span></a>                                                                    }
+                                                                            <input id="input-3" value="{{review.vote}}" readonly="readonly" class="rating form-control hide" data-show-clear="false"
+                                                                                data-show-caption="false" data-size="md">
+                                                                        </h4>
+                                                                        <a class="pull-right report-review" data-reviewreport="@item.ReviewId"><span class="glyphicon glyphicon-flag"></span></a>
+                                                                        <a class="pull-right remove-review" data-reviewremove="@item.ReviewId"><span class="glyphicon glyphicon-remove"></span></a>
 
-                                                                    <blockquote>@item.ReviewDesc</blockquote>
+                                                                        <blockquote>{{review.ReviewTxt}}</blockquote>
 
-                                                                    <div class="col-sm-12">
-                                                                        <small style="display:none;" class="text-center reportrev-lbl" data-revreport="@item.ReviewId"></small>
+                                                                        <div class="col-sm-12">
+                                                                            <small style="display:none;" class="text-center reportrev-lbl" data-revreport="@item.ReviewId"></small>
+                                                                        </div>
+                                                                        <hr>
                                                                     </div>
-                                                                    <hr />
-                                                                </div>
-                                                            </li>
-                                                        </ul>
+                                                                </li>
+                                                                {%endfor%}
+                                                            </ul>
+                                                        </div>
+
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -319,36 +327,122 @@ endblock %}
             </div>
         </div>
     </div>
-
-
+    <p id="resturant-id" style="display:none;">{{rest.id}}</p>
     <script>
         $('.rating').on('rating.change', function (event, value, caption) {
             // $('.rating').rating('refresh', {disabled: true, showClear: false, showCaption: true});
 
-            $(document).off(".firstCall");
+            $(document).off(".firstCall ");
             var anchor = $(event.currentTarget),
-            pid = anchor.closest(".rating").data("pid");
+            pid = anchor.closest(".rating ").data("pid ");
             $.ajax({
-                url: "http://localhost:3000/rate",
-                type: "POST",
+                url: "http://localhost:3000/rate ",
+                type: "POST ",
                 dataType: 'json',
                 data: { rate: value, id: pid },
                 success: function (data) {
-                    if(data==="login")
+                    if(data==="login ")
                     {
                         $('#myModal').modal('show');
-                    }else if(data.msg==="success"){
-                       $(".rating").readonly('true');
-                        // window.location.replace("http://localhost:3000/resturant/"+pid);
-                        $("#uservote").text(data.rate);
+                    }else if(data.msg==="success "){
+                       $(".rating ").readonly('true');
+                        // window.location.replace("http://localhost:3000/resturant/ "+pid);
+                        $("#uservote ").text(data.rate);
                     }
                  }
             });
         });
-    </script>
+    $('.dropdown-toggle').dropdown();
 
 
+
+     
+            
+        </script>
 
     <script>
-            $('.dropdown-toggle').dropdown()
-        </script> {% endblock %}
+$('.tabb').on('click', function () {
+
+
+        $('html, body').animate({
+            scrollTop: $('.tab-content').offset().top - 70
+        }, 800);
+
+    });
+
+           function drawReviews (reviews)
+        {
+            var html='<ul class="media-list reviews-list">';
+            for(var i =0; i<reviews.length; i++){
+                // var datee =reviews[i].review_date.substring(0, 10);
+                var eee = new Date(reviews[i].review_date);
+                var datee = eee.toLocaleString();
+                 html+='<li class="media">';
+                 html+='<a href="#">';
+                 html+='<img src="@userpic" class="media-object img-rounded" />';
+                 html+='</a>';
+                 html+='<div class="media-body" id="review">';
+                 html+='<h4 class="media-heading">';
+                 html+='<a>'+reviews[i].user_id.name.first+'</a>';
+                 html+='<p>'+datee+'</p>';
+                 html+='<input id="input-3" value="'+reviews[i].vote+'" readonly="readonly" class="rating form-control hide" data-show-clear="false" data-show-caption="false"data-size="md">';
+                 html+='</h4>';
+                 html+='<a class="pull-right report-review" data-reviewreport="@item.ReviewId"><span class="glyphicon glyphicon-flag"></span></a>';
+                 html+='<a class="pull-right remove-review" data-reviewremove="@item.ReviewId"><span class="glyphicon glyphicon-remove"></span></a>';
+                 html+='<blockquote>' + reviews[i].ReviewTxt + '</blockquote>';
+                 html+='<div class="col-sm-12">';
+                 html+='<small style="display:none;" class="text-center reportrev-lbl" data-revreport="'+reviews[i].id+'"></small>';
+                 html+='</div>';
+                 html+='<hr>';
+                 html+='<</div>';
+                 html+='</li>';
+            }
+            html+='</ul>';
+            $('#review-list').html(html);
+        }
+                 $(document).on('click', '#addReviewBtn', function() {
+            if($("#reviewTxtArea ").val().length==0)
+            {
+                $('#text-area-validation').show();
+                setTimeout(function() {
+                    $('#text-area-validation').fadeOut('slow');
+                }, 3000);
+                return;
+            }
+
+            if($('#review-rate').val()==0)
+            {
+                $('#rate-validation').show();
+                setTimeout(function() {
+                    $('#rate-validation').fadeOut('slow');
+                }, 3000);
+                return;
+            }
+            // $(document).off(".firstCall ");
+            var rest_id=$("#resturant-id ").text();
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:3000/review', // we are calling json method
+                traditional: true,
+                data: { review_text: $("#reviewTxtArea ").val() ,rest_id: rest_id ,rest_rate: $('#review-rate').val() },
+
+
+                success: function (data) {
+                    drawReviews(data);
+                    
+                    // $("#Data ").html(data);
+                    $("#reviewTxtArea ").val('');
+                    $('html, body').animate({
+                        scrollTop: $('blockquote:first').offset().top-150
+                    }, 800);
+                },
+                error: function (err) {
+                    alert('err');
+                    // var url = '@Url.Action( "../../security/login ")';
+                    // window.location.href = url;
+                }
+            });
+
+        });
+        
+            </script> {% endblock %}
