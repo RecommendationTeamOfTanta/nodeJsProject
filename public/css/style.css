@@ -5,9 +5,9 @@
         pointer-events:none;
     }
 
-.thumbnail img{
-    height: 20%;
-}
+/*.thumbnail img{
+    height: 40%;
+}*/
 
 .form-border {
         border: 1px solid #e2e2e2;

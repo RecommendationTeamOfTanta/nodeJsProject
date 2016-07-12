@@ -19,24 +19,33 @@ router.get('/resturant/:rest_id', function (req, res) {
             avgRate = sumRate / ratesCount;
             reviewsNumber = resturant.reviews.length;
 
+
+            var categories = resturant.categories;
+            for (var i = 0; i < categories.length; i++) {
+                var products_length = categories[i].products.length;
+                var topSix = categories[i].products.slice(products_length - 6, products_length);
+                categories[i].top = topSix;
+            }
             if (req.session && req.session.user) {
                 User.findOne({ _id: req.session.user._id }, { userRatings: { $elemMatch: { rest_id: rest_id } } }, function (err, user) {
+
                     if (user) {
                         if (user.userRatings.length > 0) {
                             res.render('rest', {
                                 rest: resturant, reviewsNumber: reviewsNumber,
-                                userVote: user.userRatings[0].resturantVote, avgRate: avgRate
+                                userVote: user.userRatings[0].resturantVote, avgRate: avgRate, categories: categories
                             });
                         } else {
                             res.render('rest', {
-                                rest: resturant, reviewsNumber: reviewsNumber, avgRate: avgRate
+                                rest: resturant, reviewsNumber: reviewsNumber, avgRate: avgRate,
+                                categories: categories
                             });
                         }
                     }
                 });
             }
             else {
-                res.render('rest', { rest: resturant, reviewsNumber: reviewsNumber, avgRate: avgRate });
+                res.render('rest', { rest: resturant, reviewsNumber: reviewsNumber, avgRate: avgRate, categories: categories });
             }
         }
     }).populate('reviews.user_id');

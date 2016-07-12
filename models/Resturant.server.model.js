@@ -51,6 +51,7 @@ var usersSchema = new schema({
     userRatings: [userRatings],
     features: userFeatures,
     resturants: [{ type: schema.Types.ObjectId, ref: 'Resturant' }],
+    friends:[{ type: schema.Types.ObjectId, ref: 'User' }],
     //the recommendation for the user(user-based)
     recommended_resturants: [{
         rest_id: { type: schema.Types.ObjectId, ref: 'Resturant' },

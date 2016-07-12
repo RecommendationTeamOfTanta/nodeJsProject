@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet" type="text/css" media="all" href="../css/style.css">
+<link rel="stylesheet" type="text/css" media="all" href="../css/site.css">
+
 <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="../js/star-rating.js"></script>
 <script type="text/javascript" charset="utf-8" src="../js/jquery.leanModal.min.js"></script>
@@ -28,7 +30,7 @@ endblock %}
         </div>
 
         <div class="col-md-6">
-            <a style="margin: 40px 50px 0 0;" class="btn btn-lg btn-primary img-clean" href="../writeReview.html"><span class="glyphicon glyphicon-star-empty"></span> Write a Review</a>
+            <a id="upbtnReview" style="margin: 40px 50px 0 0;" class="btn btn-lg btn-primary img-clean" href="#"><span class="glyphicon glyphicon-star-empty"></span> Write a Review</a>
 
             <a style="margin: 50px 0 0 0;" class="btn btn-default" href="writeReview.html"><span class="glyphicon glyphicon-share"></span> Share</a>
 
@@ -119,104 +121,98 @@ endblock %}
                             <div class="container" style="padding-left:0;padding-right:0;">
                                 <div class="panel-group" id="accordion">
 
-                                    @foreach (var item in Model) {
-                                    <div class="panel panel-default cordion-panel" data-catpanel="@item.CategoryId">
+                                    {% for category in categories%}
+                                    <div class="panel panel-default cordion-panel" data-catpanel="{{category.id}}">
                                         <div class="panel-heading text-center cordion-heading" style="font-size:x-large">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#@item.CategoryId" id="predict" style="display: block;">
-                                                        @item.CategoryName<span class="caret"></span>
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#{{category.id}}" id="predict" style="display: block;">
+                                                        {{category.name}}<span class="caret"></span>
                                                     </a>
                                         </div>
-                                        <div id="@item.CategoryId" class="panel-collapse collapse">
+                                        <div id="{{category.id}}" class="panel-collapse collapse">
+
+
                                             <div class="panel-body textbody">
+                                                {%for product in category.products%}
+
                                                 <div class="col-xs-18 col-sm-6 col-md-2 product">
+
                                                     <div class="thumbnail">
-                                                        <img src="~/@product.ProductPhoto??width=300&height=300" alt=" ">
-                                                        <div class="caption prod-caption">
-                                                            <h4 class="text-center">@product.ProductName</h4>
-                                                            <p class="text-center">@product.ProductDesc</p>
-                                                            @if (product.tbl_Products_price.Count() != 0) {
-                                                            <p class="text-center">large: @priceLarge</p>
-                                                            <p class="text-center">combo: @priceCombo</p>
-
-                                                            }
+                                                        <img src="../{{product.photo}}" alt="{{product.name}} " />
+                                                        <div class="caption ">
+                                                            <h6 style="background-color:#6b6767;color:white; " class="text-center ">{{product.name}}</h6>
+                                                            <p class="text-center ">{{product.description}}</p>
+                                                            {%for detail in product.details%} {%endfor%}
 
 
-                                                            <p>
-                                                                <h6 class="text-center">
-                                                                    <span class="col-sm-5 col-xs-12 col-md-7 ">
-                                                                                        <input data-pid="@product.ProductId" value="@ProductvoteAvg" class="rating form-control hide rating-input" data-show-clear="false" data-show-caption="false" data-size="md">
-                                                                                    </span>
-                                                                    <b class="col-sm-7 col-xs-12 col-md-3 prod-votes">(@countProductVotes)</b>
-                                                                </h6>
-
-                                                                @*<span class="result">ddddd</span>*@ @*
-                                                                <small data-result="@product.ProductId" class="lblResult">.</small>*@
-                                                            </p>
-
-                                                            <p data-result="@product.ProductId" class="col-sm-5 col-xs-12 col-md-7 text-nowrap lblResult">.</p>
-
+                                                            <div class="text-center ">
+                                                                <input id="input-3 " value="{{resturant.avgRate}}
+                                                            " readonly="readonly " class="rating form-control hide " data-show-clear="false "
+                                                                    data-show-caption="false " data-size="md ">
+                                                            </div>
                                                         </div>
                                                     </div>
+
                                                 </div>
-                                                } }
+                                                {%endfor%}
 
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="panel panel-default xtraa-panel-default" style="margin-top: 0;" data-catpanell="@item.CategoryId">
+                                    <div class="panel panel-default xtraa-panel-default " style="margin-top: 0;" data-catpanell="{{category.id}}">
 
-                                        <div class="panel-body fixed-panel eaxtraa-panel">
+                                        <div class="panel-body fixed-panel eaxtraa-panel ">
+                                            {%for top in category.top%}
 
-
-                                            <div class="col-xs-18 col-sm-6 col-md-2">
-                                                <div class="thumbnail extra-panel">
-                                                    <img src="~/@topPro.ProductPhoto" alt="@topPro.ProductName">
-                                                    <div class="caption">
-                                                        <h6 class="text-center">@topPro.ProductName</h6>
-                                                        <p class="text-center">@topPro.ProductDesc</p>
-                                                        <p class="text-center">price:500LE</p>
+                                            <div class="col-xs-18 col-sm-6 col-md-2 ">
+                                                <div class="thumbnail extra-panel ">
+                                                    <img src="../{{top.photo}} " alt="{{top.name}} ">
+                                                    <div class="caption ">
+                                                        <h6 class="text-center ">{{top.name}}</h6>
+                                                        <p class="text-center ">{{top.description}}</p>
+                                                        <p class="text-center ">price:500LE</p>
 
                                                     </div>
-                                                    <div class="caption-btm text-center">
-                                                        <h6>@topPro.ProductName</h6>
-                                                        <input value="@theVote" readonly="readonly" class="rating form-control hide text-center" data-show-clear="false" data-show-caption="false"
-                                                            data-size="lg">
+                                                    <div class="caption-btm text-center ">
+                                                        <h6>{{top.name}}</h6>
+                                                        <input value=" " readonly="readonly " class="rating form-control
+                                                            hide text-center " data-show-clear="false " data-show-caption="false "
+                                                            data-size="lg ">
                                                     </div>
                                                 </div>
 
 
                                             </div>
-                                            } @if (prodsCount != 0) {
-                                            <h6 class="text-center col-md-offset-11"><a data-toggle="collapse" data-parent="#accordion" href="#@item.CategoryId" class="btn btn-md btn-default seeMore"><span>more..</span></a></h6>
-                                            }
+                                            {%endfor%}
+                                            <h6 class="text-center col-md-offset-11 "><a data-toggle="collapse" data-parent="#accordion" href="#{{category.id}}" class="btn btn-md btn-default seeMore"><span>more..</span></a></h6>
+
 
 
                                         </div>
                                     </div>
 
-                                    }
-
+                                    {%endfor%}
 
                                 </div>
                             </div>
                         </div>
-                        <div id="capturedMenue" class="tab-pane fade">
-                            <div class="container" style="background-color:#d3cfcf">
+                        <div id="capturedMenue " class="tab-pane fade ">
+                            <div class="container " style="background-color:#d3cfcf ">
                                 <div class="panel panel-default col-sm-12 ">
 
-                                    <div id="DataCapturedMenues" class="panel-body fixed-panel">
+                                    <div id="DataCapturedMenues " class="panel-body fixed-panel ">
 
 
 
 
                                         @foreach (var menue in (IEnumerable
-                                        <BOL.CapturedMenue>)ViewData["capturedMenues"]) {
+                                        <BOL.CapturedMenue>)ViewData["capturedMenues "]) {
 
 
-                                            <div class="col-xs-18 col-sm-6 col-md-4">
-                                                <div class="thumbnail">
-                                                    <a href="#modal-photos-Captured">
-                                                        <img class="cap-menue" src="~/@menue.CapturePhoto?width=500&height=500" alt="food photo">
+                                            <div class="col-xs-18 col-sm-6 col-md-4 ">
+                                                <div class="thumbnail ">
+                                                    <a href="#modal-photos-Captured ">
+                                                        <img class="cap-menue " src="~/@menue.CapturePhoto?width=500&height=500
+                                                            " alt="food photo ">
                                                     </a>
 
                                                 </div>
@@ -227,61 +223,67 @@ endblock %}
                                 </div>
                             </div>
                         </div>
-                        <div id="reviews" class="tab-pane fade">
-                            <div class="container" style="background-color:#d3cfcf">
+                        <div id="reviews " class="tab-pane fade ">
+                            <div class="container " style="background-color:#d3cfcf ">
                                 <div class="panel panel-default col-sm-12 ">
-                                    <div class="panel-heading">
-                                        <h2 class="panel-title text-nowrap">Rate this</h2>
-                                        <input id="review-rate" class="rating form-control hide rating-input pull-left" data-show-clear="false" data-show-caption="false"
-                                            data-size="md">
+                                    <div class="panel-heading ">
+                                        <h2 class="panel-title text-nowrap ">Rate this</h2>
+                                        <input id="review-rate " class="rating form-control hide rating-input pull-left
+                                                            " data-show-clear="false " data-show-caption="false " data-size="md ">
 
-                                        <div id="rate-validation" style="display:none;">
-                                            <sapn class="text-danger">please rate it from 5</span>
+                                        <div id="rate-validation " style="display:none; ">
+                                            <sapn class="text-danger ">please rate it from 5</span>
                                         </div>
                                     </div>
-                                    <div class="panel-body fixed-panel reviews-pannel">
+                                    <div class="panel-body fixed-panel reviews-pannel ">
 
-                                        <div class="row">
-                                            <div class="col-sm-10 col-xs-12 col-sm-push-1 well">
+                                        <div class="row ">
+                                            <div class="col-sm-10 col-xs-12 col-sm-push-1 well ">
 
-                                                <textarea type="text" class="required form-control" id="reviewTxtArea" placeholder="Type in your review" rows="5"></textarea>
-                                                <div id="text-area-validation" style="display:none;">
-                                                    <span class="text-danger">Please type in a review.!</span>
+                                                <textarea type="text " class="required form-control " id="reviewTxtArea
+                                                            " placeholder="Type in your review " rows="5 "></textarea>
+                                                <div id="text-area-validation " style="display:none; ">
+                                                    <span class="text-danger ">Please type in a review.!</span>
                                                 </div>
                                                 <br />
-                                                <input type="button" id="addReviewBtn" value="add review" class="btn btn-md btn-primary pull-right" />
+                                                <input type="button " id="addReviewBtn " value="add review " class="btn
+                                                            btn-md btn-primary pull-right " />
                                             </div>
                                         </div>
                                         <!-- row-text-area reviews-->
-                                        <div class="row">
+                                        <div class="row ">
                                             <hr />
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-11 col-sm-push-1">
-                                                <div class="reviews">
-                                                    <div id="reviewSection">
-                                                        <div id="review-list">
+                                        <div class="row ">
+                                            <div class="col-sm-11 col-sm-push-1 ">
+                                                <div class="reviews ">
+                                                    <div id="reviewSection ">
+                                                        <div id="review-list ">
                                                             <ul>
                                                                 {%for review in rest.reviews%}
-                                                                <li class="media">
-                                                                    <a href="#">
-                                                                        <img src="@userpic" class="media-object img-rounded" />
+                                                                <li class="media ">
+                                                                    <a href="# ">
+                                                                        <img src="@userpic " class="media-object img-rounded " />
                                                                     </a>
-                                                                    <div class="media-body" id="review">
-                                                                        <h4 class="media-heading">
+                                                                    <div class="media-body " id="review ">
+                                                                        <h4 class="media-heading ">
                                                                             <a>{{review.user_id.name.full}}</a>
                                                                             <p>{{review.review_date|date('d-m-Y , h:i A',-480)}}</p>
 
-                                                                            <input id="input-3" value="{{review.vote}}" readonly="readonly" class="rating form-control hide" data-show-clear="false"
-                                                                                data-show-caption="false" data-size="md">
+                                                                            <input id="input-3 " value="{{review.vote}}
+                                                            " readonly="readonly " class="rating form-control hide " data-show-clear="false "
+                                                                                data-show-caption="false " data-size="md ">
                                                                         </h4>
-                                                                        <a class="pull-right report-review" data-reviewreport="@item.ReviewId"><span class="glyphicon glyphicon-flag"></span></a>
-                                                                        <a class="pull-right remove-review" data-reviewremove="@item.ReviewId"><span class="glyphicon glyphicon-remove"></span></a>
+                                                                        <a class="pull-right report-review
+                                                            " data-reviewreport="@item.ReviewId "><span class="glyphicon glyphicon-flag "></span></a>
+                                                                        <a class="pull-right remove-review
+                                                            " data-reviewremove="@item.ReviewId "><span class="glyphicon glyphicon-remove "></span></a>
 
                                                                         <blockquote>{{review.ReviewTxt}}</blockquote>
 
-                                                                        <div class="col-sm-12">
-                                                                            <small style="display:none;" class="text-center reportrev-lbl" data-revreport="@item.ReviewId"></small>
+                                                                        <div class="col-sm-12 ">
+                                                                            <small style="display:none; " class="text-center
+                                                            reportrev-lbl " data-revreport="@item.ReviewId "></small>
                                                                         </div>
                                                                         <hr>
                                                                     </div>
@@ -300,23 +302,25 @@ endblock %}
                                 </div>
                             </div>
                         </div>
-                        <div id="photos" class="tab-pane fade">
-                            <div class="container" style="background-color:#d3cfcf">
+                        <div id="photos " class="tab-pane fade ">
+                            <div class="container " style="background-color:#d3cfcf ">
                                 <div class="panel panel-default col-sm-12 ">
-                                    <div class="panel-heading">
-                                        <div class="row">
-                                            <input type="button" id="addPhotoBtn" value="add Photo" class="btn btn-md btn-primary col-sm-12 col-xs-12" />
-                                            <a data-toggle="modal" href="#add-photos-to-resturant" class="btn btn-primary btn-lg" style="display:block;">Add photo</a>
+                                    <div class="panel-heading ">
+                                        <div class="row ">
+                                            <input type="button " id="addPhotoBtn " value="add Photo " class="btn btn-md
+                                                            btn-primary col-sm-12 col-xs-12 " />
+                                            <a data-toggle="modal " href="#add-photos-to-resturant " class="btn btn-primary
+                                                            btn-lg " style="display:block; ">Add photo</a>
                                         </div>
                                     </div>
-                                    <div id="DataPhotos" class="panel-body fixed-panel">
+                                    <div id="DataPhotos " class="panel-body fixed-panel ">
 
-                                        @Html.Partial("_PartialPhotosUploaded", ViewData["updatedPhotos"])
+                                        @Html.Partial("_PartialPhotosUploaded ", ViewData["updatedPhotos "])
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div id="branches" class="tab-pane fade">
+                        <div id="branches " class="tab-pane fade ">
                             <h3>Menu branches</h3>
                             <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
                         </div>
@@ -327,8 +331,43 @@ endblock %}
             </div>
         </div>
     </div>
-    <p id="resturant-id" style="display:none;">{{rest.id}}</p>
+    <p id="resturant-id " style="display:none; ">{{rest.id}}</p>
+
+
+
+
     <script>
+        
+        $('#accordion').on('shown.bs.collapse', function () {
+
+        var panel = $(this).find('.in');
+        $('html, body').animate({
+            scrollTop: (panel).offset().top - 90
+        }, 700);
+
+    });
+
+$('.tabb').on('click', function () {
+
+
+        $('html, body').animate({
+            scrollTop: $('.tab-content').offset().top - 70
+        }, 800);
+
+    });
+
+    $('#upbtnReview').click(function(){
+        $('#reviewtab').trigger('click');
+        $('html, body').animate({
+            scrollTop: $('.tab-content').offset().top - 70
+        }, 800);    
+    });
+    </script>
+
+
+
+    <script>
+        $(function () {
         $('.rating').on('rating.change', function (event, value, caption) {
             // $('.rating').rating('refresh', {disabled: true, showClear: false, showCaption: true});
 
@@ -352,46 +391,41 @@ endblock %}
                  }
             });
         });
+        });
     $('.dropdown-toggle').dropdown();
-
-
-
-     
             
         </script>
 
     <script>
-$('.tabb').on('click', function () {
 
-
-        $('html, body').animate({
-            scrollTop: $('.tab-content').offset().top - 70
-        }, 800);
-
-    });
 
            function drawReviews (reviews)
         {
-            var html='<ul class="media-list reviews-list">';
+            var html='<ul class="media-list reviews-list ">';
             for(var i =0; i<reviews.length; i++){
                 // var datee =reviews[i].review_date.substring(0, 10);
                 var eee = new Date(reviews[i].review_date);
                 var datee = eee.toLocaleString();
-                 html+='<li class="media">';
-                 html+='<a href="#">';
-                 html+='<img src="@userpic" class="media-object img-rounded" />';
+                 html+='<li class="media ">';
+                 html+='<a href="# ">';
+                 html+='<img src="@userpic " class="media-object img-rounded " />';
                  html+='</a>';
-                 html+='<div class="media-body" id="review">';
-                 html+='<h4 class="media-heading">';
+                 html+='<div class="media-body " id="review ">';
+                 html+='<h4 class="media-heading ">';
                  html+='<a>'+reviews[i].user_id.name.first+'</a>';
                  html+='<p>'+datee+'</p>';
-                 html+='<input id="input-3" value="'+reviews[i].vote+'" readonly="readonly" class="rating form-control hide" data-show-clear="false" data-show-caption="false"data-size="md">';
+                 html+='<input id="input-3 " value=" '+reviews[i].vote+' " readonly="readonly " class="rating form-control
+                                                            hide " data-show-clear="false " data-show-caption="false
+                                                            "data-size="md ">';
                  html+='</h4>';
-                 html+='<a class="pull-right report-review" data-reviewreport="@item.ReviewId"><span class="glyphicon glyphicon-flag"></span></a>';
-                 html+='<a class="pull-right remove-review" data-reviewremove="@item.ReviewId"><span class="glyphicon glyphicon-remove"></span></a>';
+                 html+='<a class="pull-right report-review " data-reviewreport="@item.ReviewId "><span class="glyphicon
+                                                            glyphicon-flag "></span></a>';
+                 html+='<a class="pull-right remove-review " data-reviewremove="@item.ReviewId "><span class="glyphicon
+                                                            glyphicon-remove "></span></a>';
                  html+='<blockquote>' + reviews[i].ReviewTxt + '</blockquote>';
-                 html+='<div class="col-sm-12">';
-                 html+='<small style="display:none;" class="text-center reportrev-lbl" data-revreport="'+reviews[i].id+'"></small>';
+                 html+='<div class="col-sm-12 ">';
+                 html+='<small style="display:none; " class="text-center reportrev-lbl " data-revreport="
+                                                            '+reviews[i].id+' "></small>';
                  html+='</div>';
                  html+='<hr>';
                  html+='<</div>';
@@ -400,6 +434,8 @@ $('.tabb').on('click', function () {
             html+='</ul>';
             $('#review-list').html(html);
         }
+
+        $(document).ready(function () {
                  $(document).on('click', '#addReviewBtn', function() {
             if($("#reviewTxtArea ").val().length==0)
             {
@@ -444,5 +480,46 @@ $('.tabb').on('click', function () {
             });
 
         });
-        
-            </script> {% endblock %}
+        });  
+            </script>
+
+    <script>
+$(function() {
+         $('.panel').on('shown.bs.collapse', function (e) {
+            var catId=$(this).data("catpanel");
+            $('.xtraa-panel-default[data-catpanell=' + catId + ']').hide("slow");
+        });
+
+        $('.panel').on('hidden.bs.collapse', function (e) {
+            var catId=$(this).data("catpanel");
+            $('.xtraa-panel-default[data-catpanell=' + catId + ']').show("slow");
+        });
+
+
+
+        $("[rel='tooltip' ] ").tooltip();
+
+        $(document).on('click','.eaxtraa-panel .thumbnail',function() {
+            $(this).find('.caption').slideDown(250);
+            $(this).find('.caption-btm').hide(250);
+        });
+
+        $( ".eaxtraa-panel .thumbnail " ).mouseleave(function() {
+            $(this).find('.caption').slideUp(250);
+            $(this).find('.caption-btm').show(250);
+        });
+
+
+        $('.eaxtraa-panel .thumbnail').hover(
+
+                function () {
+                    $(this).find('.caption').slideDown(250);
+                    $(this).find('.caption-btm').hide(250);
+                },
+
+                function () {
+                    $(this).find('.caption').slideUp(250);
+                    $(this).find('.caption-btm').show(250);
+                });
+                });
+                </script> {% endblock %}

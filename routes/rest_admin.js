@@ -191,7 +191,7 @@ router.get('/add-prod', function (req, res) {
             fs.mkdirSync(dir);
         }
         var newPath = path.resolve('./public/uploads/products/' + req.files.thumbnail.name);
-        var theDbPhoto = path.join('uploads/resturants/prouducts/', req.files.thumbnail.name);
+        var theDbPhoto = path.join('uploads/products/', req.files.thumbnail.name);
 
         var details = adjustSizePrice(req.body.details);
         console.log(details);

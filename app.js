@@ -18,6 +18,7 @@ var rest = require('./routes/resturants.js');
 var signup = require('./routes/signup.js');
 var admin_rest = require('./routes/rest_admin.js');
 var admin_master = require('./routes/admin_master.js');
+var shazam = require('./routes/shazam.js');
 
 
 
@@ -95,6 +96,7 @@ app.use('/', recommendation);
 app.use('/', admin_rest);
 app.use('/', rest);
 app.use('/masterr', admin_master);
+app.use('/', shazam);
 
 
 // session and cookies details
