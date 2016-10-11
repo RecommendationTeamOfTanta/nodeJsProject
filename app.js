@@ -24,8 +24,8 @@ var shazam = require('./routes/shazam.js');
 
 var recommendation = require('./routes/recommendations.js');
 var mongoose = require('mongoose');
-//mongoose.connect('mongodb://itarget:itarget@ds025792.mlab.com:25792/itarget');
-mongoose.connect('mongodb://127.0.0.1:27017/itarget');
+mongoose.connect('mongodb://itarget:itarget@ds025792.mlab.com:25792/itarget');
+//mongoose.connect('mongodb://127.0.0.1:27017/itarget');
 var app = express();
 
 
